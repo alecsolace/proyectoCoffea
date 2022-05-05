@@ -1,0 +1,136 @@
+body{
+    margin: 0px 0px 0px 0px;
+}
+.padre{
+    width: 100%;
+    height: 100%;
+    
+}
+.arr{
+    display: flex;
+}
+.parteizqarr{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    background-color: #20161f;
+}
+.izq{
+    width: 20%;
+    height: 100%;
+    border-right: 2px solid #30272d;
+    display: row;
+}
+.logoarr{
+    width: 130px;
+    height: auto;
+    margin-left: 15px;
+}
+.imgizq{
+    width: 150px;
+    height: auto;
+    margin-left: 10px;
+    margin-top: 430px;
+}
+.der{
+    display: row;
+    width: 80%;
+    height: 100%;
+}
+.derarr{
+    width: auto;
+    height: 20%;
+    display: flex;
+}
+.accesos{
+    width: 26.66%;
+    text-align: center;
+    color: #c6c0b4;
+    font-size: 15px;
+    margin-top: 30px;
+    font-family: 'Anton', sans-serif;
+}
+.derab{
+    display: row;
+    width: auto;
+    height: 80%;
+}
+.bestseller{
+    width: 150px;
+    height: 18px;
+    background-color: #8bcac1;
+    border-bottom: 5px solid #ff4e00;
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: black;
+    margin-left: 50px;
+    margin-top: 40px;
+}
+.productoprincipal{
+    position: relative;
+    width: 300px;
+    height: auto;
+    font-family: 'Anton', sans-serif;
+    text-align: left;
+    font-size: 100px;
+    letter-spacing: 7px;
+    -webkit-text-stroke: 5px #f4e6cc;
+    color: transparent;
+    margin-left: 50px;
+}
+.cafedelmedio{
+    position: absolute;
+    width: 180px;
+    height: auto;
+    margin-top: -100px;
+    margin-left: -70px;
+}
+.infoproducto{
+    width: 250px;
+    height: auto;
+    color: #e3dfce;
+    text-align: left;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+.precioshop{
+    display: flex;
+    width: 300px;
+    height: auto;
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    color: #e5594c;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+.shopnow{
+    display: flex;
+    position: absolute;
+    border-radius: 20px;
+    border: 2px solid #cf974b;
+    width: 120px;
+    height: 30px;
+    font-size: 15px;
+    color: #e3dfce;
+    letter-spacing: 1px;
+    margin-left: 100px;
+    margin-top: -5px;
+    padding-left: 25px;
+    padding-top: 5px;
+}
+.flecha{
+    width: 20px;
+    height: 20px;
+    margin-top: 1.5px;
+    margin-left: 17px;
+}
+.partederarr{
+    width: 50%;
+    height: 100%;
+    background-color: #edad53;
+    align-items: right;
+}
