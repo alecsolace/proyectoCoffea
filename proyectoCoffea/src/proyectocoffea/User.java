@@ -1,5 +1,8 @@
 package proyectocoffea;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class User {
     private static int userID = 0;
     private String name;
@@ -10,6 +13,7 @@ public class User {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        registrarUsuario();
         userID++;
     }
 
@@ -45,4 +49,19 @@ public class User {
         this.email = email;
     }
 
+    public void registrarUsuario() {
+        // Insertar los metodos de la base de datos
+        try {
+            Connection connection;
+            String cadenaConexion = "jdbc:oracle:thin:@localhost:1521/orcl";
+            connection = DriverManager.getConnection(cadenaConexion, "admin", "admin");
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modificarUsuario() {
+        // Insertar la query de modificación.
+    }
 }
