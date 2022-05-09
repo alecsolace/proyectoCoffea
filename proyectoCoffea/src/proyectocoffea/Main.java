@@ -57,11 +57,11 @@ public class Main {
             String cadenaConexion = "jdbc:oracle:thin:@localhost:1521/XE";
             connection = DriverManager.getConnection(cadenaConexion, "ADMIN", "ADMIN");
             System.out.println("Conexión Establecida");
-            
-           // User u1 = new User("Prueba", "Prueba", "jhjhj");
-            String query = "SELECT * FROM CUSTOMERS";
+            // getUsers();
+            //Address address1 = new Address("Cesa", "15", "15A");
+            User usuario1 = new User(0, "Alexander", "Aguirre", "keevinaguirre@gmail.com", "1234..");
+            System.out.println(usuario1.toString());
 
-            
             connection.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -84,7 +84,9 @@ public class Main {
         ResultSet results = stmt.executeQuery(query);
         int cont = 0;
         while (results.next()) {
-            User user = new User(results.getString("Name"), results.getString("Last_name"), results.getString("email"));
+            // (int address, String name, String lastName, String email, String password)
+            User user = new User(results.getInt("ADDRESS_ID"), results.getString("NAME"),
+                    results.getString("LAST_NAME"), results.getString("EMAIL"), results.getString("PASSWORD"));
             userList[cont] = user;
         }
 
