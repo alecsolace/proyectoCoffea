@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\A8-PC00\\Downloads\\ojdbc7.jar"
+    ]
+}

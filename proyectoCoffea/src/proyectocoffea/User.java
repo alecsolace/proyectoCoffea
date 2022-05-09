@@ -53,7 +53,7 @@ public class User {
         // Insertar los metodos de la base de datos
         try {
             Connection connection;
-            String cadenaConexion = "jdbc:oracle:thin:@localhost:1521/orcl";
+            String cadenaConexion = "jdbc:oracle:thin:@localhost:1521/XE";
             connection = DriverManager.getConnection(cadenaConexion, "admin", "admin");
             
         } catch (Exception e) {
