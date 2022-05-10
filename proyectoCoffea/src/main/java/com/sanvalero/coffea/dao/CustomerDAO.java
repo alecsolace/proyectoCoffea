@@ -1,5 +1,5 @@
 
-package main.java.com.sanvalero.coffea.dao;
+package com.sanvalero.coffea.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import main.java.com.sanvalero.coffea.domain.Customer;
+
+import com.sanvalero.coffea.domain.Address;
+import com.sanvalero.coffea.domain.Customer;
 
 public class CustomerDAO {
 
@@ -63,7 +65,7 @@ public class CustomerDAO {
 
         PreparedStatement sentencia = connection.prepareStatement(sql);
         sentencia.setInt(1, customer.getUserID());
-        sentencia.setInt(2, customer.getAddress_ID());
+        sentencia.setInt(2, customer.getAddress().getAddress_ID());
         sentencia.setString(3, customer.getName());
         sentencia.setString(4, customer.getLastName());
         sentencia.setString(5, customer.getEmail());
@@ -78,17 +80,41 @@ public class CustomerDAO {
      */
     public ArrayList<Customer> getAllCustomers() throws SQLException {
 
-        String query = "SELECT * FROM CUSTOMERS";
+        String query = "SELECT * FROM CUSTOMERS ORDER BY CUSTOMER_ID";
         Statement statement = connection.createStatement();
         ResultSet results = statement.executeQuery(query);
         ArrayList<Customer> customerList = new ArrayList<>();
-
+        ArrayList<Address> addresses = getAddresses();
         while (results.next()) {
-            Customer customer = new Customer(results.getInt("ADDRESS_ID"), results.getString("NAME"),
-                    results.getString("LAST_NAME"), results.getString("EMAIL"), results.getString("PASSWORD"));
-            customerList.add(customer);
+            int address_ID = results.getInt("ADDRESS_ID");
+            for (Address address : addresses) {
+                if (address.getAddress_ID() == address_ID) {
+                    Customer customer = new Customer(address, results.getString("NAME"),
+                            results.getString("LAST_NAME"), results.getString("EMAIL"), results.getString("PASSWORD"));
+                    customerList.add(customer);
+                    break;
+                }
+            }
         }
         return customerList;
+    }
+
+    /**
+     * Obtains an ArrayList with all the customers present in the DDBB
+     * 
+     * @return An ArrayList of Customers
+     */
+    public ArrayList<Address> getAddresses() throws SQLException {
+        String query = "SELECT * FROM ADDRESS ORDER BY ADDRESS_ID";
+        Statement statement = connection.createStatement();
+        ResultSet results = statement.executeQuery(query);
+        ArrayList<Address> addresses = new ArrayList<>();
+        while (results.next()) {
+            Address address = new Address(results.getString("STREET_NAME"), results.getInt("STREET_NUMBER"),
+                    results.getString("APPARTMENT"));
+            addresses.add(address);
+        }
+        return addresses;
     }
 
     /**
@@ -110,6 +136,6 @@ public class CustomerDAO {
      * @param movie La película con la información a modificar
      */
     public void modifyCustomer(Customer customer) {
-
+        // TODO
     }
 }

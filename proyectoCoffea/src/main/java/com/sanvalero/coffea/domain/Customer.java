@@ -1,4 +1,4 @@
-package main.java.com.sanvalero.coffea.domain;
+package com.sanvalero.coffea.domain;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,19 +6,18 @@ import java.sql.PreparedStatement;
 
 public class Customer {
     private int userID = 0;
-    private int address_ID;
+    private Address address;
     private String name;
     private String lastName;
     private String email;
     private String password;
 
-    public Customer(int address, String name, String lastName, String email, String password) {
-        this.address_ID = address;
+    public Customer(Address address, String name, String lastName, String email, String password) {
+        this.address = address;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        registrarUsuario();
         userID++;
     }
 
@@ -54,20 +53,20 @@ public class Customer {
         this.email = email;
     }
 
-    public int getAddress_ID() {
-        return address_ID;
-    }
-
-    public void setAddress_ID(int address_ID) {
-        this.address_ID = address_ID;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void registrarUsuario() {
@@ -81,8 +80,8 @@ public class Customer {
             String createUser = "INSERT INTO CUSTOMERS VALUES(?,?,?,?,?,?)";
             PreparedStatement userStatement = connection.prepareStatement(createUser);
 
-            userStatement.setInt(1, userID);
-            userStatement.setInt(2, this.address_ID);
+            userStatement.setInt(1, this.userID);
+            userStatement.setInt(2, this.address.getAddress_ID());
             userStatement.setString(3, this.name);
             userStatement.setString(4, this.lastName);
             userStatement.setString(5, this.email);
@@ -99,4 +98,5 @@ public class Customer {
     public void modificarUsuario() {
         // Insertar la query de modificación.
     }
+
 }

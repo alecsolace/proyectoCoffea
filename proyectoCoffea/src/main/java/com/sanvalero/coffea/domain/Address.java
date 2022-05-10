@@ -1,4 +1,4 @@
-package main.java.com.sanvalero.coffea.domain;
+package com.sanvalero.coffea.domain;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,14 +7,13 @@ import java.sql.PreparedStatement;
 public class Address {
     private int address_ID = 0;
     private String streetName;
-    private String streetNumber;
+    private int streetNumber;
     private String appartment;
 
-    public Address(String streetName, String streetNumber, String appartment) {
+    public Address(String streetName, int streetNumber, String appartment) {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.appartment = appartment;
-        registrarAddress();
         address_ID++;
     }
 
@@ -31,7 +30,7 @@ public class Address {
 
             userStatement.setInt(1, address_ID);
             userStatement.setString(2, streetName);
-            userStatement.setString(3, streetNumber);
+            userStatement.setInt(3, streetNumber);
             userStatement.setString(4, appartment);
             filas = userStatement.executeUpdate();
             System.out.println("Se han insertado: " + filas + " filas.");

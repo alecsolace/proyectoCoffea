@@ -1,4 +1,4 @@
-package main.java.com.sanvalero.coffea.domain;
+package com.sanvalero.coffea.domain;
 
 /**
  * Una película
