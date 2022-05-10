@@ -266,3 +266,37 @@ h3 {
     font-size: 14px;
     color: #cacdd2;
 }
+.socials{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0rem 3rem -2.5rem;
+}
+
+.socials li{
+    margin: 0 10px;
+}
+
+.socials a{
+    text-decoration: none;
+    color: #fff;
+    border: 1.1px solid white;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.i{
+    font-size: 1.1rem;
+    width: 22px;
+    height: auto;
+    transition: color .4s ease;
+}
+
+.separador2{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    background-color: #20161f;
+    margin-top: 250px;
+}
