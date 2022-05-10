@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.sql.Connection;
 
 /**
@@ -15,7 +16,6 @@ import java.sql.Connection;
  * @author alecsolace
  */
 public class Main {
-    public static User[] userList;
 
     /**
      * @param args the command line arguments
@@ -57,10 +57,17 @@ public class Main {
             String cadenaConexion = "jdbc:oracle:thin:@localhost:1521/XE";
             connection = DriverManager.getConnection(cadenaConexion, "ADMIN", "ADMIN");
             System.out.println("Conexión Establecida");
-            // getUsers();
-            //Address address1 = new Address("Cesa", "15", "15A");
-            User usuario1 = new User(0, "Alexander", "Aguirre", "keevinaguirre@gmail.com", "1234..");
-            System.out.println(usuario1.toString());
+
+            ArrayList<Customer> customers = getCustomers();
+
+            for (Customer customer : customers) {
+                if (!customer.getEmail().equals("keevinaguirre@gmail.com")) {
+                    Customer usuario1 = new Customer(0, "Alexander", "Aguirre", "keevinaguirre@gmail.com", "1234..");
+                    System.out.println(usuario1.toString());
+                } else {
+                    System.out.println("Este usuario ya existe");
+                }
+            }
 
             connection.close();
         } catch (Exception e) {
@@ -68,27 +75,20 @@ public class Main {
         }
     }
 
-    public static void getUsers() throws SQLException {
+    public static ArrayList<Customer> getCustomers() throws SQLException {
         Connection connection;
         String cadenaConexion = "jdbc:oracle:thin:@localhost:1521/XE";
         connection = DriverManager.getConnection(cadenaConexion, "ADMIN", "ADMIN");
         Statement stmt = connection.createStatement();
         String query = "SELECT * FROM CUSTOMERS";
-        String getNumber = "SELECT COUNT(*) FROM CUSTOMERS";
-        ResultSet res = stmt.executeQuery(getNumber);
-        int numRes = 0;
-        while (res.next()) {
-            numRes = res.getInt(1);
-        }
-        userList = new User[numRes];
+        ArrayList<Customer> customerList = new ArrayList<>();
         ResultSet results = stmt.executeQuery(query);
-        int cont = 0;
         while (results.next()) {
             // (int address, String name, String lastName, String email, String password)
-            User user = new User(results.getInt("ADDRESS_ID"), results.getString("NAME"),
+            Customer customer = new Customer(results.getInt("ADDRESS_ID"), results.getString("NAME"),
                     results.getString("LAST_NAME"), results.getString("EMAIL"), results.getString("PASSWORD"));
-            userList[cont] = user;
+            customerList.add(customer);
         }
-
+        return customerList;
     }
 }

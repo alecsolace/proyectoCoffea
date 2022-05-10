@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-public class User {
+public class Customer {
     private static int userID = 0;
     private int address_ID;
     private String name;
@@ -12,7 +12,7 @@ public class User {
     private String email;
     private String password;
 
-    public User(int address, String name, String lastName, String email, String password) {
+    public Customer(int address, String name, String lastName, String email, String password) {
         this.address_ID = address;
         this.name = name;
         this.lastName = lastName;
@@ -27,7 +27,7 @@ public class User {
     }
 
     public static void setUserID(int userID) {
-        User.userID = userID;
+        Customer.userID = userID;
     }
 
     public String getName() {
