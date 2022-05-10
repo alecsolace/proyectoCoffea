@@ -73,6 +73,10 @@ body{
     margin-top: 20px;
   }
 
+  .signupMsg a{
+      color: white;
+  }
+
   .signup{
     padding: 20px;
     text-align: center;
