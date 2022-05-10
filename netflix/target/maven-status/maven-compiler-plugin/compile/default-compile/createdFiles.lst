@@ -1,6 +1,0 @@
-com/sanvalero/netflix/domain/Movie.class
-com/sanvalero/netflix/servlet/GetMoviesServlet.class
-com/sanvalero/netflix/servlet/AddMovieServlet.class
-com/sanvalero/netflix/util/Util.class
-com/sanvalero/netflix/servlet/RemoveMovieServlet.class
-com/sanvalero/netflix/dao/MovieDAO.class
