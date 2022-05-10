@@ -39,20 +39,18 @@ body{
     right:45%;
   }
   
-  .loginMsg, .signupMsg{
+    .signupMsg{
     width: 50%;
     height: 100%;
     font-size: 15px;
     box-sizing: border-box;
   }
   
-  .loginMsg .title,
   .signupMsg .title{
     font-weight: 300;
     font-size: 23px;
   }
   
-  .loginMsg p,
   .signupMsg p {
     font-weight: 100;
   }
@@ -63,7 +61,6 @@ body{
     margin-left: 12%;
   }
   
-  .loginMsg button,
   .signupMsg button {
     background-color: #20161f;
     border: 2px solid white;
@@ -75,13 +72,12 @@ body{
     padding:10px;
     margin-top: 20px;
   }
-  
-  .login, .signup{
+
+  .signup{
     padding: 20px;
     text-align: center;
   }
   
-  .login h2,
   .signup h2 {
     color: #8bcac1;
     font-size:22px;
@@ -90,7 +86,7 @@ body{
   .inputbox{
     margin-top:30px; 
   }
-  .login input, 
+
   .signup input {
     display: block;
     width: 100%;
@@ -101,7 +97,6 @@ body{
     font-size: 12px;
   }
   
-  .login button,
   .signup button{
     background-color: #8bcac1;
     border: none;
@@ -118,20 +113,8 @@ body{
     cursor: pointer;
   }
   
-  .login p {
-    cursor: pointer;
-    color:#404040;
-    font-size:15px;
-  }
   
-  .loginMsg, .signupMsg{
+ .signupMsg{
     transition: opacity .8s ease-in-out;
   }
   
-  .visibility{
-    opacity: 0;
-  }
-  
-  .hide{
-    display: none;
-  }
