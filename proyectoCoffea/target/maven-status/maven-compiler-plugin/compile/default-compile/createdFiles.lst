@@ -1,0 +1,6 @@
+com/sanvalero/coffea/domain/Movie.class
+com/sanvalero/coffea/servlet/GetMoviesServlet.class
+com/sanvalero/coffea/servlet/AddMovieServlet.class
+com/sanvalero/coffea/util/Util.class
+com/sanvalero/coffea/servlet/RemoveMovieServlet.class
+com/sanvalero/coffea/dao/MovieDAO.class
