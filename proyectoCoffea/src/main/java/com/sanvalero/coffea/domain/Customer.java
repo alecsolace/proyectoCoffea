@@ -81,7 +81,7 @@ public class Customer {
             PreparedStatement userStatement = connection.prepareStatement(createUser);
 
             userStatement.setInt(1, this.userID);
-            userStatement.setInt(2, this.address.getAddress_ID());
+            userStatement.setInt(2, this.address.getAddressID());
             userStatement.setString(3, this.name);
             userStatement.setString(4, this.lastName);
             userStatement.setString(5, this.email);

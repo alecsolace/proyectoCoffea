@@ -65,7 +65,7 @@ public class CustomerDAO {
 
         PreparedStatement sentencia = connection.prepareStatement(sql);
         sentencia.setInt(1, customer.getUserID());
-        sentencia.setInt(2, customer.getAddress().getAddress_ID());
+        sentencia.setInt(2, customer.getAddress().getAddressID());
         sentencia.setString(3, customer.getName());
         sentencia.setString(4, customer.getLastName());
         sentencia.setString(5, customer.getEmail());
@@ -88,7 +88,7 @@ public class CustomerDAO {
         while (results.next()) {
             int address_ID = results.getInt("ADDRESS_ID");
             for (Address address : addresses) {
-                if (address.getAddress_ID() == address_ID) {
+                if (address.getAddressID() == address_ID) {
                     Customer customer = new Customer(address, results.getString("NAME"),
                             results.getString("LAST_NAME"), results.getString("EMAIL"), results.getString("PASSWORD"));
                     customerList.add(customer);
