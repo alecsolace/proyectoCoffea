@@ -14,7 +14,7 @@ import com.sanvalero.coffea.domain.Customer;
 
 public class CustomerDAO {
 
-    private static final String DRIVER = "com.oracle.database.jdbc";
+    private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
     private static final String URL_CONEXION = "jdbc:oracle:thin:@localhost:1521/XE";
     private static final String USUARIO = "ADMIN";
     private static final String CONTRASENA = "ADMIN";

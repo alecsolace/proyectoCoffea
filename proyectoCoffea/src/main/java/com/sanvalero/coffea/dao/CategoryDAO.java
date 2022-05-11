@@ -11,17 +11,19 @@ import java.util.ArrayList;
 import com.sanvalero.coffea.domain.Category;
 
 public class CategoryDAO {
-    private static final String DRIVER = "com.oracle.database.jdbc";
+
+    private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
     private static final String URL_CONEXION = "jdbc:oracle:thin:@localhost:1521/XE";
     private static final String USUARIO = "ADMIN";
     private static final String CONTRASENA = "ADMIN";
-    private ArrayList<Category> categories;
+    private ArrayList<Category> categories = new ArrayList<Category>();
 
-    private Connection connection;
+    private Connection connection = DriverManager.getConnection(URL_CONEXION, USUARIO, CONTRASENA);
 
     public CategoryDAO() throws SQLException {
         connect();
         categories = getCategories();
+        disconnect();
     }
 
     /**
@@ -46,18 +48,26 @@ public class CategoryDAO {
         }
     }
 
+    public ArrayList<Category> get_categories() {
+        return categories;
+    }
     
-
+    
+    
     public ArrayList<Category> getCategories() throws SQLException {
-        String query = "SELECT * FROM CATEGORIES ORDER BY CATEGORY_ID";
-        Statement statement = connection.createStatement();
-        ResultSet results = statement.executeQuery(query);
+        
         ArrayList<Category> categoryList = new ArrayList<>();
-        while (results.next()) {
-            Category category = new Category(results.getString("NAME"));
-            category.setCategoryID(results.getInt("CATEGORY_ID"));
-            categories.add(category);
-        }
+            String query = "SELECT * FROM CATEGORIES ORDER BY CATEGORY_ID";
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(query);
+
+            while (results.next()) {
+                String name = results.getString("NAME");
+                Category category = new Category(name);
+                category.setCategoryID(results.getInt("CATEGORY_ID"));
+                categoryList.add(category);
+            }
+
         return categoryList;
     }
 
@@ -84,5 +94,5 @@ public class CategoryDAO {
             }
         }
     }
-    
+
 }

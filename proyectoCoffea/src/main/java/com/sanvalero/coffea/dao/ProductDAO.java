@@ -21,17 +21,19 @@ import com.sanvalero.coffea.domain.Product;
  */
 public class ProductDAO {
 
-    private static final String DRIVER = "com.oracle.database.jdbc";
+    private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
     private static final String URL_CONEXION = "jdbc:oracle:thin:@localhost:1521/XE";
     private static final String USUARIO = "ADMIN";
     private static final String CONTRASENA = "ADMIN";
     private ArrayList<Product> products;
-
+    private ArrayList<Category> categories;
     private Connection connection;
 
     public ProductDAO() throws SQLException {
         connect();
         products = getProducts();
+        CategoryDAO categoryDAO = new CategoryDAO();
+        categories = categoryDAO.getCategories();
     }
 
     /**
@@ -39,7 +41,7 @@ public class ProductDAO {
      */
     public void connect() {
         try {
-            Class.forName(DRIVER);
+            Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection(URL_CONEXION, USUARIO, CONTRASENA);
         } catch (ClassNotFoundException cnfe) {
             cnfe.printStackTrace();
@@ -57,10 +59,10 @@ public class ProductDAO {
     }
 
     public ArrayList<Product> getProducts() throws SQLException {
-        String query = "SELECT * FROM CUSTOMERS ORDER BY CUSTOMER_ID";
-        Statement statement = connection.createStatement();
-        ResultSet results = statement.executeQuery(query);
         ArrayList<Product> productList = new ArrayList<>();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM PRODUCTS ORDER BY PRODUCT_ID";
+        ResultSet results = statement.executeQuery(query);
 
         CategoryDAO categoryDAO = new CategoryDAO();
         ArrayList<Category> categories = categoryDAO.getCategories();
@@ -69,13 +71,12 @@ public class ProductDAO {
             int category_ID = results.getInt("CATEGORY_ID");
             for (Category category : categories) {
                 if (category.getCategoryID() == category_ID) {
-                    Product product = new Product(category, results.getString("NAME"),
-                            results.getString("DESCRIPTION"), results.getDouble("PRICE"), results.getInt("STOCK"));
+                    Product product = new Product(category, results.getString("NAME"),results.getString("DESCRIPTION"), results.getDouble("PRICE"), results.getInt("STOCK"));
                     productList.add(product);
-                    break;
                 }
             }
         }
+
         return productList;
     }
 
@@ -98,6 +99,20 @@ public class ProductDAO {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public Product getBestSeller() throws SQLException {
+        Product bestSeller = new Product(new Category("categoria"), "Placeholder", "Description", 31, 1);
+        CategoryDAO categoryDAO = new CategoryDAO();
+        categories = categoryDAO.getCategories();
+        if (categories.size() > 0 && products.size() > 0) {
+            for (Product product : products) {
+                if (product.getProductID() == 1) {
+                    bestSeller = product;
+                }
+            }
+        }
+        return bestSeller;
     }
 
     public void removeProduct(int id) {
