@@ -32,10 +32,11 @@ public class ProductDAO {
     public ProductDAO() throws SQLException {
         connect();
         products = getProducts();
-        CategoryDAO categoryDAO = new CategoryDAO();
-        categories = categoryDAO.getCategories();
     }
 
+    public ArrayList<Product> get_product(){
+        return products;
+    }
     /**
      * Conecta con la base de datos
      */
@@ -65,13 +66,14 @@ public class ProductDAO {
         ResultSet results = statement.executeQuery(query);
 
         CategoryDAO categoryDAO = new CategoryDAO();
-        ArrayList<Category> categories = categoryDAO.getCategories();
+        ArrayList<Category> categories = categoryDAO.get_categories();
 
         while (results.next()) {
             int category_ID = results.getInt("CATEGORY_ID");
             for (Category category : categories) {
                 if (category.getCategoryID() == category_ID) {
                     Product product = new Product(category, results.getString("NAME"),results.getString("DESCRIPTION"), results.getDouble("PRICE"), results.getInt("STOCK"));
+                    product.setProductID(results.getInt("PRODUCT_ID"));
                     productList.add(product);
                 }
             }

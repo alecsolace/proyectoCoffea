@@ -1,5 +1,7 @@
 package com.sanvalero.coffea.dao;
 
+import oracle.jdbc.driver.OracleDriver;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,12 +20,11 @@ public class CategoryDAO {
     private static final String CONTRASENA = "ADMIN";
     private ArrayList<Category> categories = new ArrayList<Category>();
 
-    private Connection connection = DriverManager.getConnection(URL_CONEXION, USUARIO, CONTRASENA);
+    private Connection connection;
 
     public CategoryDAO() throws SQLException {
         connect();
         categories = getCategories();
-        disconnect();
     }
 
     /**
@@ -33,6 +34,7 @@ public class CategoryDAO {
         try {
             Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL_CONEXION, USUARIO, CONTRASENA);
+            System.out.println("ok connection");
         } catch (ClassNotFoundException cnfe) {
             cnfe.printStackTrace();
         } catch (SQLException sqle) {

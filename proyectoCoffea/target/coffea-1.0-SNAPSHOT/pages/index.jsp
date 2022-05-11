@@ -44,13 +44,13 @@
                                         BEST SELLER
                                     </div>
                                     <div class="productoprincipal">
-                                        <% //ProductDAO productDAO = new ProductDAO();
-                                        //ArrayList<Product> products = productDAO.getProducts();
-                                        //Product bestSeller = productDAO.getBestSeller();
-                                        CategoryDAO categoryDAO = new CategoryDAO();
-                                        ArrayList<Category> categories = categoryDAO.get_categories();
+                                        <% 
+                                            ProductDAO productDAO = new ProductDAO();
+                                            CategoryDAO categoryDAO = new CategoryDAO();
+                                            ArrayList<Category> categories = categoryDAO.get_categories();
+                                            Product bestSeller = productDAO.getBestSeller();
                                         %>
-                                        <%= categories.size()%>
+                                        <%= bestSeller.getName()%>
                                         
                                         
 
@@ -58,10 +58,10 @@
                                                     alt="cafemedio">
                                     </div>
                                     <div class="infoproducto">
-                                        
+                                        <%= bestSeller.getDescription() %>
                                     </div>
                                     <div class="precioshop">
-                                       
+                                      $ <%= bestSeller.getPrice() %>
                                            
                                                 <div class="shopnow">
                                                     SHOP NOW
