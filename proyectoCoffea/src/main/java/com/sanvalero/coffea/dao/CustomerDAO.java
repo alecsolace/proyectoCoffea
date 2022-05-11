@@ -84,7 +84,8 @@ public class CustomerDAO {
         Statement statement = connection.createStatement();
         ResultSet results = statement.executeQuery(query);
         ArrayList<Customer> customerList = new ArrayList<>();
-        ArrayList<Address> addresses = getAddresses();
+        AddressDAO addressDAO = new AddressDAO();
+        ArrayList<Address> addresses = addressDAO.getAddresses();
         while (results.next()) {
             int address_ID = results.getInt("ADDRESS_ID");
             for (Address address : addresses) {
@@ -100,32 +101,31 @@ public class CustomerDAO {
     }
 
     /**
-     * Obtains an ArrayList with all the customers present in the DDBB
-     * 
-     * @return An ArrayList of Customers
-     */
-    public ArrayList<Address> getAddresses() throws SQLException {
-        String query = "SELECT * FROM ADDRESS ORDER BY ADDRESS_ID";
-        Statement statement = connection.createStatement();
-        ResultSet results = statement.executeQuery(query);
-        ArrayList<Address> addresses = new ArrayList<>();
-        while (results.next()) {
-            Address address = new Address(results.getString("STREET_NAME"), results.getInt("STREET_NUMBER"),
-                    results.getString("APPARTMENT"));
-            addresses.add(address);
-        }
-        return addresses;
-    }
-
-    /**
      * Elimina una película
      * 
      * @param id El id de la pelicula a eliminar
      */
     public void removeCustomer(int id) {
-        for (Customer customer : customers) {
-            if (customer.getUserID() == id) {
-                customers.remove(customer);
+
+        boolean worked = false;
+
+        try {
+            String query = "DELETE FROM CUSTOMERS WHERE CUSTOMER_ID = ?";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, id);
+            int filas = stmt.executeUpdate();
+            if (filas > 0) {
+                worked = true;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        if (worked) {
+            for (Customer customer : customers) {
+                if (customer.getUserID() == id) {
+                    customers.remove(customer);
+                }
             }
         }
     }
