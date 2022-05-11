@@ -22,13 +22,13 @@
         <div class="arr">
             <div class="parteizqarr">
                 <div class="izq">
-                    <img src="imagenes/logo.png" class="logoarr" alt="logo">
+                    <img src="../imagenes/logo.png" class="logoarr" alt="logo">
                     <img src="imagenes/cafe1.png" class="imgizq" alt="cafe">
                 </div>
                 <div class="der">
                     <div class="derarr">
                         <div class="accesos">
-                            HOME
+                            ACCESORIES
                         </div>
                         <div class="accesos">
                             MENU

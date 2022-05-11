@@ -19,12 +19,74 @@ body {
 	margin: 0 0 30px 0;
 }
 
-#site-header h1 {
-	font-size: 31px;
-	font-weight: 300;
-	padding: 40px 0;
-	position: relative;
-	margin: 0;
+#site-header .container{
+	display: flex;
+}
+
+.logoarr{
+	width: 130px;
+	height: auto;
+	margin-left: -255px;
+}
+
+.accesos {
+    width: 13.33%;
+    text-align: center;
+    color: #20161f;
+    font-size: 15px;
+    margin-top: 30px;
+	margin-left: 25px;
+    font-family: 'Anton', sans-serif;
+}
+
+.box{
+    margin-top: 15px;
+	padding-left: 330px;
+}
+
+.container-1 {
+    display: flex;
+    width: 300px;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+}
+
+.lupa {
+    width: 20px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    margin-left: 17px;
+    margin-top: -11px;
+}
+
+.container-1 input#search:hover,
+.container-1 input#search:focus,
+.container-1 input#search:active {
+    outline: none;
+    background: #f4e6cc;
+}
+
+.container-1 input#search {
+    width: 300px;
+    height: 50px;
+    background: #ffffff;
+    border: none;
+    font-size: 10pt;
+    float: left;
+    color: #000000;
+    padding-left: 45px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+
+
+    -webkit-transition: background .55s ease;
+    -moz-transition: background .55s ease;
+    -ms-transition: background .55s ease;
+    -o-transition: background .55s ease;
+    transition: background .55s ease;
 }
 
 a {
@@ -50,7 +112,6 @@ a:hover {
 	background: #fff;
 	padding-right: 150px;
 	position: absolute;
-	left: 217px;
 
 	-webkit-transition: all .2s linear;
 	-moz-transition: all .2s linear;
@@ -59,9 +120,6 @@ a:hover {
 	transition: all .2s linear;
 }
 
-#site-header h1:hover span.last-span, #site-header h1 span.is-open {
-	left: 363px;
-}
 
 #site-header h1 em {
 	font-size: 16px;
@@ -70,7 +128,7 @@ a:hover {
 }
 
 .container {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Rajdhani', sans-serif;
 	margin: 0 auto;
 	width: 980px;
 }
