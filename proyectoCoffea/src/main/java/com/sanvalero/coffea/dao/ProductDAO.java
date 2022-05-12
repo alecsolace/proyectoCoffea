@@ -34,9 +34,10 @@ public class ProductDAO {
         products = getProducts();
     }
 
-    public ArrayList<Product> get_product(){
+    public ArrayList<Product> get_product() {
         return products;
     }
+
     /**
      * Conecta con la base de datos
      */
@@ -72,7 +73,7 @@ public class ProductDAO {
             int category_ID = results.getInt("CATEGORY_ID");
             for (Category category : categories) {
                 if (category.getCategoryID() == category_ID) {
-                    Product product = new Product(category, results.getString("NAME"),results.getString("DESCRIPTION"), results.getDouble("PRICE"), results.getInt("STOCK"));
+                    Product product = new Product(category, results.getString("NAME"), results.getString("DESCRIPTION"), results.getDouble("PRICE"), results.getInt("STOCK"));
                     product.setProductID(results.getInt("PRODUCT_ID"));
                     productList.add(product);
                 }
@@ -105,6 +106,7 @@ public class ProductDAO {
 
     public Product getBestSeller() throws SQLException {
         Product bestSeller = new Product(new Category("categoria"), "Placeholder", "Description", 31, 1);
+        /*
         CategoryDAO categoryDAO = new CategoryDAO();
         categories = categoryDAO.getCategories();
         if (categories.size() > 0 && products.size() > 0) {
@@ -112,6 +114,11 @@ public class ProductDAO {
                 if (product.getProductID() == 1) {
                     bestSeller = product;
                 }
+            }
+        }*/
+        for (Product product : products) {
+            if (product.getProductID() == 1) {
+                bestSeller = product;
             }
         }
         return bestSeller;

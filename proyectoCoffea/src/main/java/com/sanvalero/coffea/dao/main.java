@@ -5,6 +5,7 @@
 package com.sanvalero.coffea.dao;
 
 import com.sanvalero.coffea.domain.Category;
+import com.sanvalero.coffea.domain.Product;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,9 +14,12 @@ import java.util.ArrayList;
  * @author A8-PC52
  */
 public class main {
+
     public static void main(String[] args) throws SQLException {
         CategoryDAO categoryDAO = new CategoryDAO();
         ArrayList<Category> cat = categoryDAO.get_categories();
-        System.out.println(cat.get(1));
+        ProductDAO productDAO = new ProductDAO();
+        ArrayList<Product> prod = productDAO.get_product();
+        System.out.println(prod);
     }
 }

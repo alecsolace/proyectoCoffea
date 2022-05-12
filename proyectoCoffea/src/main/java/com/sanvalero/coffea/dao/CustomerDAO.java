@@ -1,4 +1,3 @@
-
 package com.sanvalero.coffea.dao;
 
 import java.sql.Connection;
@@ -52,16 +51,20 @@ public class CustomerDAO {
         }
     }
 
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
+
     /**
      * Adds a customer to the database
-     * 
+     *
      * @param movie The customer with the information you want to add
      * @throws SQLException
      */
     public void addUser(Customer customer) throws SQLException {
 
-        String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, ADDRESS_ID, NAME, LAST_NAME, EMAIL, PASSWORD) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, ADDRESS_ID, NAME, LAST_NAME, EMAIL, PASSWORD) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
         PreparedStatement sentencia = connection.prepareStatement(sql);
         sentencia.setInt(1, customer.getUserID());
@@ -75,7 +78,7 @@ public class CustomerDAO {
 
     /**
      * Obtains an ArrayList with all the customers present in the DDBB
-     * 
+     *
      * @return An ArrayList of Customers
      */
     public ArrayList<Customer> getAllCustomers() throws SQLException {
@@ -92,6 +95,7 @@ public class CustomerDAO {
                 if (address.getAddressID() == address_ID) {
                     Customer customer = new Customer(address, results.getString("NAME"),
                             results.getString("LAST_NAME"), results.getString("EMAIL"), results.getString("PASSWORD"));
+                    customer.setUserID(results.getInt("CUSTOMER_ID"));
                     customerList.add(customer);
                     break;
                 }
@@ -102,7 +106,7 @@ public class CustomerDAO {
 
     /**
      * Elimina una película
-     * 
+     *
      * @param id El id de la pelicula a eliminar
      */
     public void removeCustomer(int id) {
@@ -132,7 +136,7 @@ public class CustomerDAO {
 
     /**
      * Modifica la información de una pelicula
-     * 
+     *
      * @param movie La película con la información a modificar
      */
     public void modifyCustomer(Customer customer) {

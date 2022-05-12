@@ -11,14 +11,15 @@ import java.util.ArrayList;
 import com.sanvalero.coffea.domain.Address;
 
 public class AddressDAO {
+
     private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
     private static final String URL_CONEXION = "jdbc:oracle:thin:@localhost:1521/XE";
     private static final String USUARIO = "ADMIN";
     private static final String CONTRASENA = "ADMIN";
     private ArrayList<Address> addresses;
-
+    
     private Connection connection;
-
+    
     public AddressDAO() throws SQLException {
         connect();
         addresses = getAddresses();
@@ -37,7 +38,7 @@ public class AddressDAO {
             sqle.printStackTrace();
         }
     }
-
+    
     public void disconnect() {
         try {
             connection.close();
@@ -45,7 +46,7 @@ public class AddressDAO {
             sqle.printStackTrace();
         }
     }
-
+    
     public ArrayList<Address> getAddresses() throws SQLException {
         String query = "SELECT * FROM ADDRESS ORDER BY ADDRESS_ID";
         Statement statement = connection.createStatement();
@@ -54,14 +55,15 @@ public class AddressDAO {
         while (results.next()) {
             Address address = new Address(results.getString("STREET_NAME"), results.getInt("STREET_NUMBER"),
                     results.getString("APPARTMENT"));
+            address.setAddressID(results.getInt("ADDRESS_ID"));
             addresses.add(address);
         }
         return addressList;
     }
-
+    
     public void removeCustomer(int id) {
         boolean worked = false;
-
+        
         try {
             String query = "DELETE FROM ADDRESS WHERE ADDRESS_ID = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -73,7 +75,7 @@ public class AddressDAO {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
+        
         if (worked) {
             for (Address address : addresses) {
                 if (address.getAddressID() == id) {

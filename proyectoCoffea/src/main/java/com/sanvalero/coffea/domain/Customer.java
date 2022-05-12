@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class Customer {
+
     private int userID = 0;
     private Address address;
     private String name;
@@ -14,6 +15,14 @@ public class Customer {
 
     public Customer(Address address, String name, String lastName, String email, String password) {
         this.address = address;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        userID++;
+    }
+
+    public Customer(String name, String lastName, String email, String password) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;

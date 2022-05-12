@@ -18,7 +18,7 @@ public class CategoryDAO {
     private static final String URL_CONEXION = "jdbc:oracle:thin:@localhost:1521/XE";
     private static final String USUARIO = "ADMIN";
     private static final String CONTRASENA = "ADMIN";
-    private ArrayList<Category> categories = new ArrayList<Category>();
+    private ArrayList<Category> categories;
 
     private Connection connection;
 
