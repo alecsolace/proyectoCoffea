@@ -64,11 +64,11 @@
             <div class="partederarr">
                 <div class="box">
                     <div class="container-1">
-                        <img src="imagenes/lupa.png" class="lupa" alt="lupa">
+                        <img src="../imagenes/lupa.png" class="lupa" alt="lupa">
                         <input type="search" id="search" placeholder="Search..." />
                     </div>
                 </div>
-                <img src="imagenes/custom_header.jpg" class="imgprincipal" alt="cafetal">
+                <img src="../imagenes/custom_header.jpg" class="imgprincipal" alt="cafetal">
                 <div class="infoimgprincipal">
                     <h3>ETHICAL SOURCING</h3>
                     Our amazing coffee would not be possible without farmers all around the world. 
@@ -80,7 +80,7 @@
         </div>
         <div class="abajo">
             <div class="colores">
-                <img src="imagenes/separador.png" class="separador" alt="separador">
+                <img src="../imagenes/separador.png" class="separador" alt="separador">
             </div>
             <div class="contactanos">
                 <div class="contactanos-coffea">
@@ -90,16 +90,16 @@
                         Our world renowned coffe has a 100% satisfaction rate among our customers.
                     </p>
                     <ul class="socials">
-                        <li><a href="#"><img src="imagenes/twitter.png" class="i"></a></li>
-                        <li><a href="#"><img src="imagenes/facebook.png" class="i"></a></li>
-                        <li><a href="#"><img src="imagenes/instagram.png" class="i"></a></li>
-                        <li><a href="#"><img src="imagenes/youtube.png" class="i"></a></li>
-                        <li><a href="#"><img src="imagenes/pinterest.png" class="i"></a></li>
+                        <li><a href="#"><img src="../imagenes/twitter.png" class="i"></a></li>
+                        <li><a href="#"><img src="../imagenes/facebook.png" class="i"></a></li>
+                        <li><a href="#"><img src="../imagenes/instagram.png" class="i"></a></li>
+                        <li><a href="#"><img src="../imagenes/youtube.png" class="i"></a></li>
+                        <li><a href="#"><img src="../imagenes/pinterest.png" class="i"></a></li>
                      </ul>
                 </div>
             </div>
             <div class="colores">
-                <img src="imagenes/separador.png" class="separador2" alt="separador2">
+                <img src="../imagenes/separador.png" class="separador2" alt="separador2">
             </div>
         </div>
     </div>
