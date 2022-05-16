@@ -104,10 +104,6 @@ a:hover {
 	color: #53b5aa;
 }
 
-#site-header h1 span {
-	color: #53b5aa;
-}
-
 #site-header h1 span.last-span {
 	background: #fff;
 	padding-right: 150px;
@@ -118,13 +114,6 @@ a:hover {
 	-ms-transition: all .2s linear;
 	-o-transition: all .2s linear;
 	transition: all .2s linear;
-}
-
-
-#site-header h1 em {
-	font-size: 16px;
-	font-style: normal;
-	vertical-align: middle;
 }
 
 .container {
