@@ -5,22 +5,25 @@ body {
 	overflow-x: hidden;
 }
 
-.clearfix {
+.fix {
   content: "";
   display: table;
   clear: both;	
 }
 
-#site-header, #site-footer {
+#arriba, #abajo {
 	background: #cf974b;
 }
 
-#site-header {
+#arriba {
 	margin: 0 0 30px 0;
 }
 
-#site-header .container{
+#arriba .containerarr{
 	display: flex;
+	font-family: 'Rajdhani', sans-serif;
+	margin: 0 auto;
+	width: 980px;
 }
 
 .logoarr{
@@ -39,7 +42,7 @@ body {
     font-family: 'Anton', sans-serif;
 }
 
-.box{
+.caja{
     margin-top: 15px;
 	padding-left: 330px;
 }
@@ -104,7 +107,7 @@ a:hover {
 	color: #53b5aa;
 }
 
-#site-header h1 span.last-span {
+#arriba h1 span.last-span {
 	background: #fff;
 	padding-right: 150px;
 	position: absolute;
@@ -122,15 +125,15 @@ a:hover {
 	width: 980px;
 }
 
-#cart {
+#carrito {
 	width: 100%;
 }
 
-#cart h1 {
+#carrito h1 {
 	font-weight: 300;
 }
 
-#cart a {
+#carrito a {
 	color: #8bcac1;
 	text-decoration: none;
 
@@ -141,16 +144,16 @@ a:hover {
 	transition: color .2s linear;
 }
 
-#cart a:hover {
+#carrito a:hover {
 	color: #000;
 }
 
-.product.removed {
+.producto.eliminado {
 	margin-left: 980px !important;
 	opacity: 0;
 }
 
-.product {
+.producto {
 	border: 1px solid #eee;
 	margin: 20px 0;
 	width: 100%;
@@ -164,19 +167,19 @@ a:hover {
 	transition: margin .2s linear, opacity .2s linear;
 }
 
-.product img {
+.producto img {
 	width: 100%;
 	height: 100%;
 }
 
-.product header, .product .content {
+.producto header, .producto .contenido {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-style: none none solid none;
 	float: left;
 }
 
-.product header {
+.producto header {
 	background: #000;
 	margin: 0 1% 20px 0;
 	overflow: hidden;
@@ -186,15 +189,15 @@ a:hover {
 	height: 195px;
 }
 
-.product header:hover img {
+.producto header:hover img {
 	opacity: .7;
 }
 
-.product header:hover h3 {
+.producto header:hover h3 {
 	bottom: 73px;
 }
 
-.product header h3 {
+.producto header h3 {
 	background: #8bcac1;
 	color: #fff;
 	font-size: 22px;
@@ -214,11 +217,11 @@ a:hover {
 	transition: bottom .2s linear;
 }
 
-.remove {
+.eliminado {
 	cursor: pointer;
 }
 
-.product .content {
+.producto .contenido {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	height: 140px;
@@ -226,20 +229,20 @@ a:hover {
 	width: 75%;
 }
 
-.product h1 {
+.producto h1 {
 	color: #8bcac1;
 	font-size: 25px;
 	font-weight: 300;
 	margin: 17px 0 20px 0;
 }
 
-.product footer.content {
+.producto footer.contenido {
 	height: 50px;
 	margin: 6px 0 0 0;
 	padding: 0;
 }
 
-.product footer .price {
+.producto footer .precio {
 	background: #fcfcfc;
 	color: #000;
 	float: right;
@@ -250,7 +253,7 @@ a:hover {
 	padding: 0 30px;
 }
 
-.product footer .full-price {
+.producto footer .preciototal {
 	background: #8bcac1;
 	color: #fff;
 	float: right;
@@ -267,19 +270,19 @@ a:hover {
 	transition: margin .15s linear;
 }
 
-.qt, .qt-plus, .qt-minus {
+.cant, .mas, .menos {
 	display: block;
 	float: left;
 }
 
-.qt {
+.cant {
 	font-size: 19px;
 	line-height: 50px;
 	width: 70px;
 	text-align: center;
 }
 
-.qt-plus, .qt-minus {
+.mas, .menos {
 	background: #fcfcfc;
 	border: none;
 	font-size: 30px;
@@ -293,29 +296,26 @@ a:hover {
 	transition: background .2s linear;
 }
 
-.qt-plus:hover, .qt-minus:hover {
+.mas:hover, .menos:hover {
 	background: #8bcac1;
 	color: #fff;
 	cursor: pointer;
 }
 
-.qt-plus {
+.mas {
 	line-height: 50px;
 }
 
-.qt-minus {
+.menos {
 	line-height: 47px;
 }
 
-#site-footer {
+#abajo {
 	margin: 30px 0 0 0;
-}
-
-#site-footer {
 	padding: 40px;
 }
 
-#site-footer h1 {
+#abajo h1 {
 	background: #fcfcfc;
 	border: 1px solid #ccc;
 	border-style: none none solid none;
@@ -326,27 +326,27 @@ a:hover {
 	text-align: center;
 }
 
-#site-footer h2 {
+#abajo h2 {
 	font-size: 24px;
 	font-weight: 300;
 	margin: 10px 0 0 0;
 }
 
-#site-footer h3 {
+#abajo h3 {
 	font-size: 19px;
 	font-weight: 300;
 	margin: 15px 0;
 }
 
-.left {
+.izquierda {
 	float: left;
 }
 
-.right {
+.derecha {
 	float: right;
 }
 
-.btn {
+.botonab {
 	background: #8bcac1;
 	border: 1px solid #999;
 	border-style: none none solid none;
@@ -366,46 +366,7 @@ a:hover {
 	transition: all .2s linear;
 }
 
-.btn:hover {
+.botonab:hover {
 	color: #fff;
 	background: #8bcac1;
-}
-
-.type {
-	background: #fcfcfc;
-	font-size: 13px;
-	padding: 10px 16px;
-	left: 100%;
-}
-
-.type, .color {
-	border: 1px solid #ccc;
-	border-style: none none solid none;
-	position: absolute;
-}
-
-.color {
-	width: 40px;
-	height: 40px;
-	right: -40px;
-}
-
-.red {
-	background: #cb5a5e;
-}
-
-.yellow {
-	background: #f1c40f;
-}
-
-.blue {
-	background: #3598dc;
-}
-
-.minused {
-	margin: 0 50px 0 0 !important;
-}
-
-.added {
-	margin: 0 -50px 0 0 !important;
 }
