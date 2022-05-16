@@ -5,12 +5,11 @@ body {
     overflow-x: hidden;
 }
 
-#site-header,
-#site-footer {
+#arriba {
     background: #cf974b;
 }
 
-#site-header .container {
+#arriba .containerarr {
     display: flex;
 }
 
@@ -30,7 +29,7 @@ body {
     font-family: 'Anton', sans-serif;
 }
 
-.box {
+.caja {
     margin-top: 15px;
     padding-left: 460px;
 }
@@ -95,7 +94,7 @@ a:hover {
     color: #53b5aa;
 }
 
-#site-header h1 span.last-span {
+#arriba h1 span.last-span {
     background: #fff;
     position: absolute;
 
