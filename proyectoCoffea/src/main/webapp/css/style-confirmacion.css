@@ -1,0 +1,73 @@
+body {
+    background-color: #20161f;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.container {
+    width: 600px;
+    height: 350px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+}
+
+.backbox {
+    background-color: #edad53;
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 50%;
+    display: inline-flex;
+}
+
+.frontbox {
+    background-color: white;
+    border-radius: 20px;
+    height: 100%;
+    width: 50%;
+    z-index: 10;
+    position: absolute;
+    right: 130px;
+    margin-right: 3%;
+    margin-left: 3%;
+    transition: right .8s ease-in-out;
+}
+
+.confirmacion {
+    padding: 20px;
+    text-align: center;
+}
+
+.confirmacion h2 {
+    color: #8bcac1;
+    font-size: 22px;
+}
+
+.texto {
+    margin-top: 30px;
+}
+
+
+.confirmacion button {
+    background-color: #8bcac1;
+    border: none;
+    color: white;
+    font-size: 12px;
+    font-weight: 300;
+    box-sizing: content-box;
+    padding: 10px;
+    border-radius: 10px;
+    width: 60px;
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
