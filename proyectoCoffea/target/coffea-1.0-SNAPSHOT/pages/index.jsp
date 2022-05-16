@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Coffea</title>
-        <link href="../css/style.css" rel="stylesheet" type="text/css">
+        <link href="../css/style-home.css" rel="stylesheet" type="text/css">
         <script src="js/script2.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,10 @@
 
                                 <%
                                     ProductDAO productDAO = new ProductDAO();
-                                    productDAO.getProducts();
+                                    if (productDAO.getConnection() == null) {
+                                        productDAO.connect();
+                                    }
+                                    ArrayList<Product> productList = productDAO.get_products();
                                     Product bestSeller = productDAO.getBestSeller();
                                 %>
                                 <%= bestSeller.getName()%>

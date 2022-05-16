@@ -34,7 +34,7 @@ public class ProductDAO {
         products = getProducts();
     }
 
-    public ArrayList<Product> get_product() {
+    public ArrayList<Product> get_products() {
         return products;
     }
 
@@ -147,4 +147,9 @@ public class ProductDAO {
             }
         }
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
 }

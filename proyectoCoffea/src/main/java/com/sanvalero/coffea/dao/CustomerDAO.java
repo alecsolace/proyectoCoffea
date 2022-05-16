@@ -58,7 +58,9 @@ public class CustomerDAO {
     /**
      * Adds a customer to the database
      *
+     * @param customer
      * @param movie The customer with the information you want to add
+     * @return
      * @throws SQLException
      */
     public int addUser(Customer customer) throws SQLException {
@@ -77,7 +79,8 @@ public class CustomerDAO {
             sentencia.setString(6, customer.getPassword());
             status = sentencia.executeUpdate();
             return status;
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return status;
     }
@@ -149,4 +152,9 @@ public class CustomerDAO {
     public void modifyCustomer(Customer customer) {
         // TODO
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
 }

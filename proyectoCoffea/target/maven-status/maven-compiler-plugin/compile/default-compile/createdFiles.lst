@@ -3,7 +3,6 @@ com\sanvalero\coffea\domain\Address.class
 com\sanvalero\coffea\dao\CategoryDAO.class
 com\sanvalero\coffea\dao\ProductDAO.class
 com\sanvalero\coffea\dao\AddressDAO.class
-com\sanvalero\coffea\dao\main.class
 com\sanvalero\coffea\util\Util.class
 com\sanvalero\coffea\domain\Customer.class
 com\sanvalero\coffea\domain\Product.class

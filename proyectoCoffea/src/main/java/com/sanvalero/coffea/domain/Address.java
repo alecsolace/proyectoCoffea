@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class Address {
+
     private int addressID = 0;
     private String streetName;
     private int streetNumber;
@@ -46,6 +47,30 @@ public class Address {
 
     public void setAddressID(int address_ID) {
         this.addressID = address_ID;
+    }
+
+    public String getAppartment() {
+        return appartment;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public int getStreetNumber() {
+        return streetNumber;
+    }
+
+    public void setAppartment(String appartment) {
+        this.appartment = appartment;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
 }

@@ -65,7 +65,24 @@ public class AddressDAO {
         return addressList;
     }
 
-    public void removeCustomer(int id) {
+    public int addAddress(Address adress) {
+        int rows = 0;
+        try {
+            String sql = "INSERT INTO ADDRESS (ADDRESS_ID, STREET_NAME, STREET_NUMBER, APPARTMENT) "
+                    + "VALUES (?, ?, ?, ?)";
+            PreparedStatement sentencia = connection.prepareStatement(sql);
+            sentencia.setInt(1, adress.getAddressID());
+            sentencia.setString(2, adress.getStreetName());
+            sentencia.setInt(3, adress.getStreetNumber());
+            sentencia.setString(4, adress.getAppartment());
+            rows = sentencia.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return rows;
+    }
+
+    public void removeAddress(int id) {
         boolean worked = false;
 
         try {

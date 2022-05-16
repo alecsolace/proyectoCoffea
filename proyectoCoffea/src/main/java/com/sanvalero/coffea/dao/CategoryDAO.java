@@ -53,22 +53,20 @@ public class CategoryDAO {
     public ArrayList<Category> get_categories() {
         return categories;
     }
-    
-    
-    
-    public ArrayList<Category> getCategories() throws SQLException {
-        
-        ArrayList<Category> categoryList = new ArrayList<>();
-            String query = "SELECT * FROM CATEGORIES ORDER BY CATEGORY_ID";
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery(query);
 
-            while (results.next()) {
-                String name = results.getString("NAME");
-                Category category = new Category(name);
-                category.setCategoryID(results.getInt("CATEGORY_ID"));
-                categoryList.add(category);
-            }
+    public ArrayList<Category> getCategories() throws SQLException {
+
+        ArrayList<Category> categoryList = new ArrayList<>();
+        String query = "SELECT * FROM CATEGORIES ORDER BY CATEGORY_ID";
+        Statement statement = connection.createStatement();
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String name = results.getString("NAME");
+            Category category = new Category(name);
+            category.setCategoryID(results.getInt("CATEGORY_ID"));
+            categoryList.add(category);
+        }
 
         return categoryList;
     }
