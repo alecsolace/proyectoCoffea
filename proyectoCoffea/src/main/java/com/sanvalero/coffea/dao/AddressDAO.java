@@ -17,12 +17,12 @@ public class AddressDAO {
     private static final String USUARIO = "ADMIN";
     private static final String CONTRASENA = "ADMIN";
     private ArrayList<Address> addresses;
-    
+
     private Connection connection;
-    
+
     public AddressDAO() throws SQLException {
         connect();
-        addresses = getAddresses();
+        addresses = getAllAddresses();
     }
 
     /**
@@ -38,7 +38,7 @@ public class AddressDAO {
             sqle.printStackTrace();
         }
     }
-    
+
     public void disconnect() {
         try {
             connection.close();
@@ -46,8 +46,12 @@ public class AddressDAO {
             sqle.printStackTrace();
         }
     }
-    
-    public ArrayList<Address> getAddresses() throws SQLException {
+
+    public ArrayList<Address> getAddresses() {
+        return addresses;
+    }
+
+    public ArrayList<Address> getAllAddresses() throws SQLException {
         String query = "SELECT * FROM ADDRESS ORDER BY ADDRESS_ID";
         Statement statement = connection.createStatement();
         ResultSet results = statement.executeQuery(query);
@@ -56,14 +60,14 @@ public class AddressDAO {
             Address address = new Address(results.getString("STREET_NAME"), results.getInt("STREET_NUMBER"),
                     results.getString("APPARTMENT"));
             address.setAddressID(results.getInt("ADDRESS_ID"));
-            addresses.add(address);
+            addressList.add(address);
         }
         return addressList;
     }
-    
+
     public void removeCustomer(int id) {
         boolean worked = false;
-        
+
         try {
             String query = "DELETE FROM ADDRESS WHERE ADDRESS_ID = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -75,7 +79,7 @@ public class AddressDAO {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         if (worked) {
             for (Address address : addresses) {
                 if (address.getAddressID() == id) {

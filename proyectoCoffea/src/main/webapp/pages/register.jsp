@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.sanvalero.coffea.domain.Customer"%>
 <%@page import="com.sanvalero.coffea.dao.CustomerDAO"%>
 <!DOCTYPE html>
@@ -16,6 +17,12 @@
     </head>
 
     <body>
+        <% Customer newUser;
+            CustomerDAO customerDAO = new CustomerDAO();
+            ArrayList<Customer> customers = customerDAO.getCustomers();
+
+            Object userExists = request.getAttribute("userExists");
+        %>
         <div class="container">
             <div class="backbox">
                 <div class="signupMsg">
@@ -29,17 +36,22 @@
             <div class="frontbox">
                 <div class="signup">
                     <h2>SIGN UP</h2>
-                    <form action="register2.jsp" method="post">
+                    <form action="processRegistration.jsp" method="post">
+                        <%= userExists.toString()%>
+                        <p>There is already an user registered with this email</p>
+                        <p>Did you want to <a href="login">Log In?</a></p>
+                        <%%>
                         <div class="inputbox">
-                            <input type="text" name="fullname" placeholder="  FULLNAME">
-                            <input type="text" name="email" placeholder="  EMAIL">
-                            <input type="password" name="password" placeholder="  PASSWORD">
-                            <input type="text" name="direccion" placeholder="  DIRECCION">
-                            <input type="text" name="numero" placeholder="  NUMERO">
-                            <input type="text" name="cp" placeholder="  CP">
+                            <input type="text" name="fullname" placeholder="  FULLNAME"  onclick="this.value = ''">
+                            <input type="text" name="email" placeholder="  EMAIL"  onclick="this.value = ''">
+                            <input type="password" name="password" placeholder="  PASSWORD"  onclick="this.value = ''">
+                            <input type="text" name="direccion" placeholder="  DIRECCION"  onclick="this.value = ''">
+                            <input type="text" name="numero" placeholder="  NUMERO"  onclick="this.value = ''">
+                            <input type="text" name="cp" placeholder="  CP"  onclick="this.value = ''">
                         </div>
                         <br>
                         <input type="submit" name="submit" id="next" value="SIGUIENTE">
+
                     </form>
                     <br>
                 </div>

@@ -1,7 +1,6 @@
 body {
     margin: 0px 0px 0px 0px;
 }
-
 .padre {
     height: auto;
     display: row;
@@ -63,6 +62,7 @@ h3 {
     font-size: 15px;
     margin-top: 30px;
     font-family: 'Anton', sans-serif;
+    text-decoration: none;
 }
 
 .derab {
@@ -229,7 +229,7 @@ h3 {
     transition: background .55s ease;
 }
 .abajo{
-   display: row;
+    display: row;
 }
 
 .separador{

@@ -30,13 +30,13 @@
                     <div class="der">
                         <div class="derarr">
                             <div class="accesos">
-                                HOME
+                                <a id="nounderline" class="accesos" href="./index.jsp">   HOME </a>
+                            </div>
+                            <div class="accesos" href="./productos.jsp">
+                                <a class="accesos" href="./productos.jsp">MENU</a>
                             </div>
                             <div class="accesos">
-                                MENU
-                            </div>
-                            <div class="accesos">
-                                ABOUT US
+                                <a class="accesos" href="./sobrenosotros.html">  ABOUT US </a>
                             </div>
                         </div>
                         <div class="derab">
@@ -44,6 +44,7 @@
                                 BEST SELLER
                             </div>
                             <div class="productoprincipal">
+
                                 <%
                                     ProductDAO productDAO = new ProductDAO();
                                     productDAO.getProducts();

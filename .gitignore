@@ -39,3 +39,4 @@ testem.log
 .DS_Store
 Thumbs.db
 /coffea/target/
+proyectoCoffea/target/coffea-1.0-SNAPSHOT/

@@ -61,25 +61,32 @@ public class CustomerDAO {
      * @param movie The customer with the information you want to add
      * @throws SQLException
      */
-    public void addUser(Customer customer) throws SQLException {
+    public int addUser(Customer customer) throws SQLException {
+        int status = 0;
+        try {
 
-        String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, ADDRESS_ID, NAME, LAST_NAME, EMAIL, PASSWORD) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, ADDRESS_ID, NAME, LAST_NAME, EMAIL, PASSWORD) "
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement sentencia = connection.prepareStatement(sql);
-        sentencia.setInt(1, customer.getUserID());
-        sentencia.setInt(2, customer.getAddress().getAddressID());
-        sentencia.setString(3, customer.getName());
-        sentencia.setString(4, customer.getLastName());
-        sentencia.setString(5, customer.getEmail());
-        sentencia.setString(6, customer.getPassword());
-        sentencia.executeUpdate();
+            PreparedStatement sentencia = connection.prepareStatement(sql);
+            sentencia.setInt(1, customer.getUserID());
+            sentencia.setInt(2, customer.getAddress().getAddressID());
+            sentencia.setString(3, customer.getName());
+            sentencia.setString(4, customer.getLastName());
+            sentencia.setString(5, customer.getEmail());
+            sentencia.setString(6, customer.getPassword());
+            status = sentencia.executeUpdate();
+            return status;
+        } catch (Exception e) {
+        }
+        return status;
     }
 
     /**
      * Obtains an ArrayList with all the customers present in the DDBB
      *
      * @return An ArrayList of Customers
+     * @throws java.sql.SQLException
      */
     public ArrayList<Customer> getAllCustomers() throws SQLException {
 

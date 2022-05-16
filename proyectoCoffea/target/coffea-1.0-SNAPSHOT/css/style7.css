@@ -110,10 +110,20 @@ a:hover {
 .container {
     width: 100%;
     height: auto;
-    display: row;
     font-family: 'Rajdhani', sans-serif;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.productContainer {
+    width: 100%;
+    height: auto;
+    font-family: 'Rajdhani', sans-serif;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
 .titulo {
@@ -129,38 +139,26 @@ a:hover {
 .products {
     width: 300px;
     height: auto;
-
     display: flex;
-
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-
-
+    margin: 5px;
     background: url("https://cdn11.bigcommerce.com/s-bp9oll2/images/stencil/1200x1200/products/194/794/Mocha-Java-Blend-Coffee-min__33853.1632337246.jpg?c=2");
     background-color: black;
     background-size: cover;
     cursor: pointer;
-
     -webkit-box-shadow: 0 0 5px #000;
     box-shadow: 0 0 5px #000;
 }
 
 .overlay {
     width: 300px;
-    height: auto;
-
+    height: 300px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 2fr 2fr 1fr;
-
     background: rgba(77, 77, 77, .9);
     color: #FEF5DF;
     opacity: 0;
     transition: all 0.5s;
-
     font-family: 'Rajdhani', sans-serif;
 }
 
@@ -226,26 +224,26 @@ a:hover {
 }
 
 
-.container:hover .overlay {
+.products:hover .overlay {
     opacity: 1;
 }
 
-.container:hover .head {
+.products:hover .head {
     transform: translateY(0px);
 }
 
-.container:hover hr {
+.products:hover hr {
     width: 75px;
     transition-delay: 0.4s;
 }
 
-.container:hover .price {
+.products:hover .price {
     transform: translateY(0px);
     transition-delay: 0.3s;
     opacity: 1;
 }
 
-.container:hover .cart {
+.products:hover .cart {
     transform: translateY(0px);
     transition-delay: 0.6s;
     opacity: 1;
