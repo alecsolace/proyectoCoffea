@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Productos</title>
-        <link href="../css/style7.css" rel="stylesheet" type="text/css">
+        <link href="../css/style-productos.css" rel="stylesheet" type="text/css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -18,35 +18,35 @@
 
     <body>
         <% ProductDAO productDAO = new ProductDAO();
-            ArrayList<Product> products = productDAO.get_product();
+            ArrayList<Product> products = productDAO.get_products();
             CategoryDAO categoryDAO = new CategoryDAO();
             ArrayList<Category> categories = categoryDAO.get_categories(); %>
         <header id="site-header">
             <div class="container">
                 <a href="./index.jsp"><img src="../imagenes/logo.png" class="logoarr" alt="logo"  ></a>
                 <div class="accesos"> 
-                        <a href="./accesories"> ACCESORIES </a>
+                    <a href="./accesories"> ACCESORIES </a>
 
-                    </div>
-                    <div class="accesos">
-                        <a href="./productos.jsp"> MENU </a> 
-                    </div>
-                    <div class="accesos">
-                        ABOUT US
-                    </div>
-                    <div class="box">
-                        <div class="container-1">
-                            <img src="../imagenes/lupa.png" class="lupa" alt="lupa">
-                            <input type="search" id="search" placeholder="Search..." />
-                        </div>
+                </div>
+                <div class="accesos">
+                    <a href="./productos.jsp"> MENU </a> 
+                </div>
+                <div class="accesos">
+                    ABOUT US
+                </div>
+                <div class="box">
+                    <div class="container-1">
+                        <img src="../imagenes/lupa.png" class="lupa" alt="lupa">
+                        <input type="search" id="search" placeholder="Search..." />
                     </div>
                 </div>
-            </header>
+            </div>
+        </header>
 
-            <div class="productContainer">
-                <div class="titulo">
-                    CHOOSE A PRODUCT
-                </div>
+        <div class="productContainer">
+            <div class="titulo">
+                CHOOSE A PRODUCT
+            </div>
             <% for (Category category : categories) {%>
 
 
@@ -60,10 +60,10 @@
             <div class="products">
 
                 <a >
-                        <div class="overlay">
-                            <div class="items"></div>
-                            <div class="items head">
-                                <p><%=product.getName()%></p>
+                    <div class="overlay">
+                        <div class="items"></div>
+                        <div class="items head">
+                            <p><%=product.getName()%></p>
                             <hr>
                         </div>
                         <div class="items price">
