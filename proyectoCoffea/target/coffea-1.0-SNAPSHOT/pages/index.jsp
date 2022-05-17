@@ -47,9 +47,6 @@
 
                                 <%
                                     ProductDAO productDAO = new ProductDAO();
-                                    if (productDAO.getConnection() == null) {
-                                        productDAO.connect();
-                                    }
                                     ArrayList<Product> productList = productDAO.get_products();
                                     Product bestSeller = productDAO.getBestSeller();
                                 %>

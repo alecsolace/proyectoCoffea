@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.sanvalero.coffea.dao.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sanvalero.coffea.domain.*"%>
@@ -20,7 +21,8 @@
         <% ProductDAO productDAO = new ProductDAO();
             ArrayList<Product> products = productDAO.get_products();
             CategoryDAO categoryDAO = new CategoryDAO();
-            ArrayList<Category> categories = categoryDAO.get_categories(); %>
+            ArrayList<Category> categories = categoryDAO.get_categories();
+            DecimalFormat df = new DecimalFormat("0.00");%>
         <header id="site-header">
             <div class="container">
                 <a href="./index.jsp"><img src="../imagenes/logo.png" class="logoarr" alt="logo"  ></a>
@@ -54,20 +56,20 @@
                 <%= category.getName()%>
             </div>
             <% for (Product product : products) {
-                    if (product.getCategory().getCategoryID() == category.getCategoryID()) { %>
-            <% request.setAttribute("productID", product.getProductID());%>
+                    if (product.getCategory().getCategoryID() == category.getCategoryID()) {%>
 
-            <div class="products">
+            <div class="products" style="background: url('<%=product.getImage()%>'); background-size: 300px 300px">
 
-                <a >
+                <a href="./productDetail.jsp?param=<%=product.getProductID()%>" >
                     <div class="overlay">
                         <div class="items"></div>
                         <div class="items head">
-                            <p><%=product.getName()%></p>
+                            <p><%=product.getName()%>
+                            </p>
                             <hr>
                         </div>
                         <div class="items price">
-                            <p class="new">$<%=product.getPrice()%></p>
+                            <p class="new">$<%=df.format(product.getPrice())%></p>
                         </div>
                         <div class="items cart">
                             <span> ADD TO CART </span>
