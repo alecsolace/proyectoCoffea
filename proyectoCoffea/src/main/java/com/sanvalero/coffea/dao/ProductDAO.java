@@ -43,7 +43,7 @@ public class ProductDAO {
      */
     public void connect() {
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL_CONEXION, USUARIO, CONTRASENA);
         } catch (ClassNotFoundException cnfe) {
             cnfe.printStackTrace();
@@ -73,7 +73,8 @@ public class ProductDAO {
             int category_ID = results.getInt("CATEGORY_ID");
             for (Category category : categories) {
                 if (category.getCategoryID() == category_ID) {
-                    Product product = new Product(category, results.getString("NAME"), results.getString("DESCRIPTION"), results.getDouble("PRICE"), results.getInt("STOCK"));
+                    Product product = new Product(category, results.getString("NAME"), results.getString("DESCRIPTION"),
+                            results.getDouble("PRICE"), results.getInt("STOCK"), results.getString("IMAGE"));
                     product.setProductID(results.getInt("PRODUCT_ID"));
                     productList.add(product);
                 }
@@ -87,7 +88,7 @@ public class ProductDAO {
 
         try {
 
-            String createUser = "INSERT INTO PRODUCTS (PRODUCT_ID, CATEGORY_ID, NAME, DESCRIPTION, PRICE, STOCK) VALUES(?,?,?,?,?,?)";
+            String createUser = "INSERT INTO PRODUCTS (PRODUCT_ID, CATEGORY_ID, NAME, DESCRIPTION, PRICE, STOCK) VALUES(?,?,?,?,?,?,?)";
             PreparedStatement userStatement = connection.prepareStatement(createUser);
 
             userStatement.setInt(1, product.getProductID());
@@ -105,17 +106,19 @@ public class ProductDAO {
     }
 
     public Product getBestSeller() throws SQLException {
-        Product bestSeller = new Product(new Category("categoria"), "Placeholder", "Description", 31, 1);
+        Product bestSeller = new Product(new Category("categoria"), "Placeholder", "Description", 31, 1,
+                "../imagenes/");
         /*
-        CategoryDAO categoryDAO = new CategoryDAO();
-        categories = categoryDAO.getCategories();
-        if (categories.size() > 0 && products.size() > 0) {
-            for (Product product : products) {
-                if (product.getProductID() == 1) {
-                    bestSeller = product;
-                }
-            }
-        }*/
+         * CategoryDAO categoryDAO = new CategoryDAO();
+         * categories = categoryDAO.getCategories();
+         * if (categories.size() > 0 && products.size() > 0) {
+         * for (Product product : products) {
+         * if (product.getProductID() == 1) {
+         * bestSeller = product;
+         * }
+         * }
+         * }
+         */
         for (Product product : products) {
             if (product.getProductID() == 1) {
                 bestSeller = product;
