@@ -1,5 +1,4 @@
-
-package main.java.com.sanvalero.coffea.dao;
+package com.sanvalero.coffea.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,11 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import main.java.com.sanvalero.coffea.domain.Customer;
+
+import com.sanvalero.coffea.domain.Address;
+import com.sanvalero.coffea.domain.Customer;
 
 public class CustomerDAO {
 
-    private static final String DRIVER = "com.oracle.database.jdbc";
+    private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
     private static final String URL_CONEXION = "jdbc:oracle:thin:@localhost:1521/XE";
     private static final String USUARIO = "ADMIN";
     private static final String CONTRASENA = "ADMIN";
@@ -50,66 +51,110 @@ public class CustomerDAO {
         }
     }
 
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
+
     /**
      * Adds a customer to the database
-     * 
+     *
+     * @param customer
      * @param movie The customer with the information you want to add
+     * @return
      * @throws SQLException
      */
-    public void addUser(Customer customer) throws SQLException {
+    public int addUser(Customer customer) throws SQLException {
+        int status = 0;
+        try {
 
-        String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, ADDRESS_ID, NAME, LAST_NAME, EMAIL, PASSWORD) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, ADDRESS_ID, NAME, LAST_NAME, EMAIL, PASSWORD) "
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement sentencia = connection.prepareStatement(sql);
-        sentencia.setInt(1, customer.getUserID());
-        sentencia.setInt(2, customer.getAddress_ID());
-        sentencia.setString(3, customer.getName());
-        sentencia.setString(4, customer.getLastName());
-        sentencia.setString(5, customer.getEmail());
-        sentencia.setString(6, customer.getPassword());
-        sentencia.executeUpdate();
+            PreparedStatement sentencia = connection.prepareStatement(sql);
+            sentencia.setInt(1, customer.getUserID());
+            sentencia.setInt(2, customer.getAddress().getAddressID());
+            sentencia.setString(3, customer.getName());
+            sentencia.setString(4, customer.getLastName());
+            sentencia.setString(5, customer.getEmail());
+            sentencia.setString(6, customer.getPassword());
+            status = sentencia.executeUpdate();
+            return status;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return status;
     }
 
     /**
      * Obtains an ArrayList with all the customers present in the DDBB
-     * 
+     *
      * @return An ArrayList of Customers
+     * @throws java.sql.SQLException
      */
     public ArrayList<Customer> getAllCustomers() throws SQLException {
 
-        String query = "SELECT * FROM CUSTOMERS";
+        String query = "SELECT * FROM CUSTOMERS ORDER BY CUSTOMER_ID";
         Statement statement = connection.createStatement();
         ResultSet results = statement.executeQuery(query);
         ArrayList<Customer> customerList = new ArrayList<>();
-
+        AddressDAO addressDAO = new AddressDAO();
+        ArrayList<Address> addresses = addressDAO.getAddresses();
         while (results.next()) {
-            Customer customer = new Customer(results.getInt("ADDRESS_ID"), results.getString("NAME"),
-                    results.getString("LAST_NAME"), results.getString("EMAIL"), results.getString("PASSWORD"));
-            customerList.add(customer);
+            int address_ID = results.getInt("ADDRESS_ID");
+            for (Address address : addresses) {
+                if (address.getAddressID() == address_ID) {
+                    Customer customer = new Customer(address, results.getString("NAME"),
+                            results.getString("LAST_NAME"), results.getString("EMAIL"), results.getString("PASSWORD"));
+                    customer.setUserID(results.getInt("CUSTOMER_ID"));
+                    customerList.add(customer);
+                    break;
+                }
+            }
         }
         return customerList;
     }
 
     /**
      * Elimina una película
-     * 
+     *
      * @param id El id de la pelicula a eliminar
      */
     public void removeCustomer(int id) {
-        for (Customer customer : customers) {
-            if (customer.getUserID() == id) {
-                customers.remove(customer);
+
+        boolean worked = false;
+
+        try {
+            String query = "DELETE FROM CUSTOMERS WHERE CUSTOMER_ID = ?";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, id);
+            int filas = stmt.executeUpdate();
+            if (filas > 0) {
+                worked = true;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        if (worked) {
+            for (Customer customer : customers) {
+                if (customer.getUserID() == id) {
+                    customers.remove(customer);
+                }
             }
         }
     }
 
     /**
      * Modifica la información de una pelicula
-     * 
+     *
      * @param movie La película con la información a modificar
      */
     public void modifyCustomer(Customer customer) {
-
+        // TODO
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
 }

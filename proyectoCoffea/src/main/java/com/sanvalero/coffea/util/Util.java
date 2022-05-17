@@ -1,4 +1,4 @@
-package main.java.com.sanvalero.coffea.util;
+package com.sanvalero.coffea.util;
 
 /**
  * Clase con métodos estáticos de utilidad

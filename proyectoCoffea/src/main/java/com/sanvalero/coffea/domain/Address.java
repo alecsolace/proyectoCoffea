@@ -1,37 +1,37 @@
-package main.java.com.sanvalero.coffea.domain;
+package com.sanvalero.coffea.domain;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class Address {
-    private int address_ID = 0;
+
+    private int addressID = 0;
     private String streetName;
-    private String streetNumber;
+    private int streetNumber;
     private String appartment;
 
-    public Address(String streetName, String streetNumber, String appartment) {
+    public Address(String streetName, int streetNumber, String appartment) {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.appartment = appartment;
-        registrarAddress();
-        address_ID++;
+        addressID++;
     }
 
     public void registrarAddress() {
         // Insertar los metodos de la base de datos
         int filas = 0;
         try {
-            Connection connection;
+            Class.forName("com.oracle.database.jdbc");
             String cadenaConexion = "jdbc:oracle:thin:@localhost:1521/XE";
-            connection = DriverManager.getConnection(cadenaConexion, "ADMIN", "ADMIN");
+            Connection connection = DriverManager.getConnection(cadenaConexion, "ADMIN", "ADMIN");
 
-            String createUser = "INSERT INTO ADDRESS VALUES(?,?,?,?)";
+            String createUser = "INSERT INTO ADDRESS(ADDRESS_ID, STREET_NAME, STREET_NUMBER, APPARTMENT) VALUES(?,?,?,?)";
             PreparedStatement userStatement = connection.prepareStatement(createUser);
 
-            userStatement.setInt(1, address_ID);
+            userStatement.setInt(1, addressID);
             userStatement.setString(2, streetName);
-            userStatement.setString(3, streetNumber);
+            userStatement.setInt(3, streetNumber);
             userStatement.setString(4, appartment);
             filas = userStatement.executeUpdate();
             System.out.println("Se han insertado: " + filas + " filas.");
@@ -41,12 +41,36 @@ public class Address {
 
     }
 
-    public int getAddress_ID() {
-        return address_ID;
+    public int getAddressID() {
+        return addressID;
     }
 
-    public void setAddress_ID(int address_ID) {
-        this.address_ID = address_ID;
+    public void setAddressID(int address_ID) {
+        this.addressID = address_ID;
+    }
+
+    public String getAppartment() {
+        return appartment;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public int getStreetNumber() {
+        return streetNumber;
+    }
+
+    public void setAppartment(String appartment) {
+        this.appartment = appartment;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
 }
