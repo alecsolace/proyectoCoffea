@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import com.sanvalero.coffea.domain.Category;
 import com.sanvalero.coffea.domain.Product;
+import java.util.Random;
 
 /**
  *
@@ -108,6 +109,8 @@ public class ProductDAO {
     public Product getBestSeller() throws SQLException {
         Product bestSeller = new Product(new Category("categoria"), "Placeholder", "Description", 31, 1,
                 "../imagenes/");
+        Random rd = new Random();
+        int numRandom = rd.nextInt(products.size());
         /*
          * CategoryDAO categoryDAO = new CategoryDAO();
          * categories = categoryDAO.getCategories();
@@ -120,7 +123,7 @@ public class ProductDAO {
          * }
          */
         for (Product product : products) {
-            if (product.getProductID() == 1) {
+            if (product.getProductID() == numRandom) {
                 bestSeller = product;
             }
         }

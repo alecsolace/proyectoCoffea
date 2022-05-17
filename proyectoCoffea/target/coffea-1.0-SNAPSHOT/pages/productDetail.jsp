@@ -63,7 +63,7 @@
                             <ol class="listaruta">
                                 <li class="sitioruta"><a class="linkRuta" href="./index.jsp">Home</a></li>
                                 <li class="sitioruta"><a class="linkRuta" href="./productos.jsp"> Products</a></li>
-                                <li class="sitioruta activa">Java</li>
+                                <li class="sitioruta activa"><%= product.getName()%></li>
                             </ol>
                         </nav>
                     </div>
@@ -82,12 +82,12 @@
                         </div>
                     </div>
                     <div class="infoproducto">
-                        <h1><%=product.getName()%> <%= selectedProductID%></h1>
+                        <h1><%=product.getName()%> </h1>
                         <h2>$<%= df.format(product.getPrice())%></h2>
                         <div class="descripcion">
                             <p><%= product.getDescription()%></p>
                         </div>
-                        <button class="añadircarrito">Add To Cart</button>
+                        <button class="añadircarrito"><a href="./carrito.html?param=<%=product.getProductID()%>">Add To Cart</a></button>
                     </div>
                 </div>
                 <div class="grid productosrelacionados">
@@ -100,15 +100,15 @@
 
 
                     %>
-                    <div class="otros">
-                        <img src="<%= relatedProduct.getImage()%>" class="active">
-                        <h4><%=relatedProduct.getName()%></h4>
-                        <p class="precio">$<%= df.format(relatedProduct.getPrice())%></p>
-                    </div>
-                    <% cont++;
+                    <div class="otros"><a href="./productDetail.jsp?param=<%=product.getProductID()%>" >
+                            <img src="<%= relatedProduct.getImage()%>" class="active">
+                            <h4><%=relatedProduct.getName()%></h4>
+                            <p class="precio">$<%= df.format(relatedProduct.getPrice())%></p>
+                        </a></div>
+                        <% cont++;
 
-                            }
-                        } %>
+                                }
+                            } %>
                 </div>
             </div>
         </main>

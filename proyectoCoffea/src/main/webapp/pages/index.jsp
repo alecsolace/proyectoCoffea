@@ -1,4 +1,5 @@
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="com.sanvalero.coffea.domain.*" %>
 <%@page import="com.sanvalero.coffea.dao.*" %>
@@ -11,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Coffea</title>
         <link href="../css/style-home.css" rel="stylesheet" type="text/css">
-        <script src="js/script2.js"></script>
+        <script src="../js/script2.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -49,6 +50,7 @@
                                     ProductDAO productDAO = new ProductDAO();
                                     ArrayList<Product> productList = productDAO.get_products();
                                     Product bestSeller = productDAO.getBestSeller();
+                                    DecimalFormat df = new DecimalFormat("0.00");
                                 %>
                                 <%= bestSeller.getName()%>
 
@@ -61,12 +63,12 @@
                                 <%= bestSeller.getDescription()%>
                             </div>
                             <div class="precioshop">
-                                $ <%= bestSeller.getPrice()%>
+                                $ <%= df.format(bestSeller.getPrice())%>
 
                                 <div class="shopnow">
-                                    SHOP NOW
-                                    <img src="../imagenes/flecha-apuntando-hacia-la-izquierda-dentro-de-un-circulo (1).png"
-                                         class="flecha" alt="flecha">
+                                    <a href="./productDetail.jsp?param=<%=bestSeller.getProductID()%>">  SHOP NOW 
+                                        <img src="../imagenes/flecha-apuntando-hacia-la-izquierda-dentro-de-un-circulo (1).png"
+                                             class="flecha" alt="flecha"></a>
                                 </div>
                             </div>
                         </div>
