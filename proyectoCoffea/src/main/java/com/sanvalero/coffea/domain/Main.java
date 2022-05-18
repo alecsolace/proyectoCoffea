@@ -4,9 +4,7 @@
  */
 package com.sanvalero.coffea.domain;
 
-import com.sanvalero.coffea.dao.ProductDAO;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  *
@@ -15,10 +13,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        ProductDAO productDAO = new ProductDAO();
-        Product bestSeller = productDAO.getBestSeller();
-        ArrayList<Product> productList = productDAO.get_products();
-        System.out.println("Funciona= " + productList.size());
+        // TODO
     }
 
 }
