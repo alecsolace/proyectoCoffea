@@ -87,7 +87,7 @@
                         <div class="descripcion">
                             <p><%= product.getDescription()%></p>
                         </div>
-                        <button class="añadircarrito"><a href="./carrito.html?param=<%=product.getProductID()%>">Add To Cart</a></button>
+                        <button class="añadircarrito"><a href="./carrito.jsp?param=<%=product.getProductID()%>">Add To Cart</a></button>
                     </div>
                 </div>
                 <div class="grid productosrelacionados">

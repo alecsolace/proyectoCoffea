@@ -1,6 +1,7 @@
 package com.sanvalero.coffea.domain;
 
 public class CartLine {
+
     private int cartLineID = 0;
     private Product product;
     private Cart cart;
@@ -11,6 +12,13 @@ public class CartLine {
         this.cartLineID = cartLineID;
         this.product = product;
         this.cart = cart;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public CartLine(int cartLineID, Product product, int quantity, double price) {
+        this.cartLineID = cartLineID;
+        this.product = product;
         this.quantity = quantity;
         this.price = price;
     }

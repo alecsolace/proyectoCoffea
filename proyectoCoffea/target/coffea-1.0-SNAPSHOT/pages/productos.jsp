@@ -22,7 +22,9 @@
             ArrayList<Product> products = productDAO.get_products();
             CategoryDAO categoryDAO = new CategoryDAO();
             ArrayList<Category> categories = categoryDAO.get_categories();
-            DecimalFormat df = new DecimalFormat("0.00");%>
+            DecimalFormat df = new DecimalFormat("0.00");
+
+        %>
         <header id="site-header">
             <div class="container">
                 <a href="./index.jsp"><img src="../imagenes/logo.png" class="logoarr" alt="logo"  ></a>
@@ -71,9 +73,9 @@
                         <div class="items price">
                             <p class="new">$<%=df.format(product.getPrice())%></p>
                         </div>
-                        <div class="items cart">
-                            <span> ADD TO CART </span>
-                        </div>
+                        <div class="items cart"> <a href="./carrito.jsp?param=<%=product.getProductID()%>">
+                                <span> ADD TO CART </span>
+                            </a> </div>
                     </div>
                 </a>
             </div>

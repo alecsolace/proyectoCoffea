@@ -1,3 +1,6 @@
+<%@page import="com.sanvalero.coffea.domain.*"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.sanvalero.coffea.dao.*"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,13 +8,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Cart</title>
-        <link href="../css/style-header.css" rel="stylesheet" type="text/css">
+        <link href="../css/style-carrito.css" rel="stylesheet" type="text/css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
     </head>
     <body>
+
+
         <div class="header">
             <img src="../imagenes/logo.png" class="logoarr" alt="logo">
             <div class="header-right">
@@ -34,10 +39,35 @@
         <div class="container">
 
             <section id="carrito"> 
+                <%
+                    CartLineDAO cartLinesDAO = new CartLineDAO();
+                    ProductDAO productDAO = new ProductDAO();
+                    ArrayList<CartLine> cartLines = new ArrayList<>();
+                    cartLines = (ArrayList<CartLine>) application.getAttribute("carrito");
+                    ArrayList<Product> productList = productDAO.get_products();
+                    int selectedProductID = Integer.parseInt(request.getParameter("param"));
+                    if (cartLines != null) {
+
+                        for (Product productS : productList) {
+                            if (productS.getProductID() == selectedProductID) {
+
+                                Product productAdded = productS;
+                                CartLine cartLine = new CartLine((cartLines.size() + 1), productAdded, 1, productAdded.getPrice());
+                                cartLines.add(cartLine);
+                            }
+                        }
+                        for (CartLine cartLineProduct : cartLines) {
+
+                            for (Product product : productList) {
+
+                                if (product.getProductID() == cartLineProduct.getProduct().getProductID()) {
+
+
+                %>
                 <article class="producto">
                     <header>
                         <a class="eliminado">
-                            <img src="../imagenes/producto prueba.png" alt="">
+                            <img src="<%=product.getImage()%>" alt="">
 
                             <h3>Remove product</h3>
                         </a>
@@ -45,10 +75,9 @@
 
                     <div class="contenido">
 
-                        <h1>Lorem ipsum</h1>
+                        <h1><%=product.getName()%></h1>
 
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, numquam quis perspiciatis ea ad omnis provident laborum dolore in atque.
-
+                        <%=product.getDescription()%>
 
                     </div>
 
@@ -58,83 +87,18 @@
                         <span class="mas">+</span>
 
                         <h2 class="preciototal">
-                            29.98?
+                            <%= product.getPrice() * cartLineProduct.getQuantity()%>
                         </h2>
 
                         <h2 class="precio">
-                            14.99?
+                            <%= product.getPrice()%>
                         </h2>
                     </footer>
                 </article>
-
-                <article class="producto">
-                    <header>
-                        <a class="eliminado">
-                            <img src="../imagenes/producto prueba.png" alt="">
-
-                            <h3>Remove product</h3>
-                        </a>
-                    </header>
-
-                    <div class="contenido">
-
-                        <h1>Lorem ipsum dolor</h1>
-
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, numquam quis perspiciatis ea ad omnis provident laborum dolore in atque.
-
-
-                    </div>
-
-                    <footer class="contenido">
-
-                        <span class="menos">-</span>
-                        <span class="cant">1</span>
-                        <span class="mas">+</span>
-
-                        <h2 class="preciototal">
-                            79.99?
-                        </h2>
-
-                        <h2 class="precio">
-                            79.99?
-                        </h2>
-                    </footer>
-                </article>
-
-                <article class="producto">
-                    <header>
-                        <a class="eliminado">
-                            <img src="../imagenes/producto prueba.png" alt="">
-
-                            <h3>Remove product</h3>
-                        </a>
-                    </header>
-
-                    <div class="contenido">
-
-                        <h1>Lorem ipsum dolor ipsdu</h1>
-
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, numquam quis perspiciatis ea ad omnis provident laborum dolore in atque.
-
-
-                    </div>
-
-                    <footer class="contenido">
-
-                        <span class="menos">-</span>
-                        <span class="cant">1</span>
-                        <span class="mas">+</span>
-
-                        <h2 class="preciototal">
-                            53.99?
-                        </h2>
-
-                        <h2 class="precio">
-                            17.99?
-                        </h2>
-                    </footer>
-                </article>
-
+                <% }
+                            }
+                        }
+                    }%>
             </section>
 
         </div>

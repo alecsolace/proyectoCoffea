@@ -4,17 +4,6 @@ body {
     padding: 0;
     overflow-x: hidden;
 }
-
-.fix {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-#abajo {
-    background: #cf974b;
-}
-
 .header {
     overflow: hidden;
     background-color: #cf974b;
@@ -145,6 +134,17 @@ body {
         float: none;
     }
 }
+
+.fix {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#abajo {
+    background: #cf974b;
+}
+
 
 .container {
     font-family: 'Rajdhani', sans-serif;

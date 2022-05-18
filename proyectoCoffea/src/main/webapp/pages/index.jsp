@@ -21,6 +21,11 @@
     </head>
 
     <body>
+        <%
+            CartLineDAO cartLinesDAO = new CartLineDAO();
+            ArrayList<CartLine> cartLines = new ArrayList<>();
+            cartLines = cartLinesDAO.getCartLines();
+            application.setAttribute("carrito", cartLines); %>
         <div class="padre">
             <div class="arr">
                 <div class="parteizqarr">
