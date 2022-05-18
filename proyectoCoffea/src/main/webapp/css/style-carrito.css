@@ -17,7 +17,7 @@ body {
 
 .header {
 	overflow: hidden;
-	background-color: #cf974b;
+	background-color: #edad53;
 	font-family: 'Anton', sans-serif;
   }
   
@@ -396,4 +396,8 @@ body {
 .botonab:hover {
 	color: #fff;
 	background: #8bcac1;
+}
+
+img:hover {
+    opacity: 0.7;
 }
