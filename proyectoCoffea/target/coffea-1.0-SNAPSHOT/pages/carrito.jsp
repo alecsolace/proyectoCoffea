@@ -1,3 +1,5 @@
+<%@page import="java.sql.Date"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.sanvalero.coffea.domain.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sanvalero.coffea.dao.*"%>
@@ -39,28 +41,46 @@
         <div class="container">
 
             <section id="carrito"> 
+
                 <%
                     CartLineDAO cartLinesDAO = new CartLineDAO();
                     ProductDAO productDAO = new ProductDAO();
-                    ArrayList<CartLine> cartLines = new ArrayList<>();
-                    cartLines = (ArrayList<CartLine>) application.getAttribute("carrito");
                     ArrayList<Product> productList = productDAO.get_products();
+                    ArrayList<CartLine> cartLines = (ArrayList<CartLine>) application.getAttribute("carrito");
+                    CartDAO cartDAO = new CartDAO();
+                    CustomerDAO customerDAO = new CustomerDAO();
+                    ArrayList<Customer> customerList = customerDAO.getCustomers();
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    if (cartLines == null) {
+                        cartLines = new ArrayList<>();
+                    }
+
                     int selectedProductID = Integer.parseInt(request.getParameter("param"));
-                    if (cartLines != null) {
 
-                        for (Product productS : productList) {
-                            if (productS.getProductID() == selectedProductID) {
+                    int totalPrice = 0;
 
-                                Product productAdded = productS;
-                                CartLine cartLine = new CartLine((cartLines.size() + 1), productAdded, 1, productAdded.getPrice());
-                                cartLines.add(cartLine);
-                            }
-                        }
-                        for (CartLine cartLineProduct : cartLines) {
+                    for (Customer customer : customerList) {
+                        if (customer.getUserID() == 1) {
 
-                            for (Product product : productList) {
+                            Cart cart = new Cart(cartDAO.getCarts().size(), customer, totalPrice, new Date(24, 02, 2022));
+                            if (cartLines != null) {
 
-                                if (product.getProductID() == cartLineProduct.getProduct().getProductID()) {
+                                for (Product productS : productList) {
+
+                                    if (productS.getProductID() == selectedProductID) {
+
+                                        Product productAdded = productS;
+
+                                        CartLine cartLine = new CartLine((cartLines.size() + 1), productAdded, 1, productAdded.getPrice());
+
+                                        application.setAttribute("carrito", cartLines);
+
+                                    }
+                                    for (CartLine cartLineProduct : cartLines) {
+
+                                        for (Product product : productList) {
+
+                                            if (product.getProductID() == cartLineProduct.getProduct().getProductID()) {
 
 
                 %>
@@ -83,22 +103,22 @@
 
                     <footer class="contenido">
                         <span class="menos">-</span>
-                        <span class="cant">1</span>
+                        <span class="cant"><%=cartLineProduct.getQuantity()%></span>
                         <span class="mas">+</span>
 
                         <h2 class="preciototal">
-                            <%= product.getPrice() * cartLineProduct.getQuantity()%>
+                            $<%= product.getPrice() * cartLineProduct.getQuantity()%>
                         </h2>
 
                         <h2 class="precio">
-                            <%= product.getPrice()%>
+                            $<%= df.format(product.getPrice())%>
                         </h2>
                     </footer>
                 </article>
-                <% }
-                            }
+                <%}
                         }
-                    }%>
+                    }
+                %>
             </section>
 
         </div>
@@ -107,17 +127,23 @@
             <div class="container fix">
 
                 <div class="izquierda">
-                    <h2 class="subtotal">Subtotal: <span>163.96</span>?</h2>
-                    <h3 class="tax">Taxes (5%): <span>8.2</span>?</h3>
-                    <h3 class="shipping">Shipping: <span>5.00</span>?</h3>
+                    <h2 class="subtotal">Subtotal: <span>$<%= df.format(cart.getPrice())%> </span></h2>
+                    <h3 class="tax">Taxes (21%): <span>$<%= df.format(0.21 * cart.getPrice())%> </span></h3>
+                    <h3 class="shipping">Shipping: <span>$5.00</span></h3>
                 </div>
 
                 <div class="derecha">
-                    <h1 class="total">Total: <span>177.16</span>?</h1>
+                    <h1 class="total">Total: <span>$<%=df.format(cart.getPrice() + (0.21 * cart.getPrice()) + 5)%> </span>?</h1>
                     <a class="botonab">Checkout</a>
                 </div>
 
             </div>
         </footer>
+        <%
+                        }
+                    }
+                }
+            }
+        %>
     </body>
 </html>

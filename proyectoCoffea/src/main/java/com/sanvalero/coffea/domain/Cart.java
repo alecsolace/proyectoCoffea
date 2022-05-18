@@ -3,6 +3,7 @@ package com.sanvalero.coffea.domain;
 import java.sql.Date;
 
 public class Cart {
+
     private int cartID;
     private Customer customer;
     private double price;
@@ -13,6 +14,9 @@ public class Cart {
         this.customer = customer;
         this.price = price;
         this.orderDate = orderDate;
+    }
+
+    public Cart() {
     }
 
     public int getCartID() {
