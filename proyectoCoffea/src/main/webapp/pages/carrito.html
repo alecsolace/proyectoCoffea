@@ -12,26 +12,24 @@
         <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
     </head>
 <body>
-    <header id="arriba">
-		<div class="containerarr">
-			<img src="../imagenes/logo.png" class="logoarr" alt="logo">
-			<div class="accesos">
-				ACCESORIES
+    <div class="header">
+		<img src="../imagenes/logo.png" class="logoarr" alt="logo">
+		<div class="header-right">
+		  <a class="active" href="index.jsp">HOME</a>
+		  <a href="productos.jsp">PRODUCTS</a>
+		  <a href="sobrenosotros.html">ABOUT US</a>
+		  <div class="caja">
+			<div class="container-1">
+			  <img src="../imagenes/lupa.png" class="lupa" alt="lupa">
+			  <input type="search" id="search" placeholder="Search..." />
 			</div>
-			<div class="accesos">
-				MENU
+			<div class="enlaces">
+			  <a href="carrito.html"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
+			  <a href="login.html"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion" alt="iniciosesion"></a>
 			</div>
-			<div class="accesos">
-				ABOUT US
-			</div>
-			<div class="caja">
-				<div class="container-1">
-					<img src="../imagenes/lupa.png" class="lupa" alt="lupa">
-					<input type="search" id="search" placeholder="Search..." />
-				</div>
-			</div>
+		  </div>
 		</div>
-	</header>
+	  </div>
 
 	<div class="container">
 
