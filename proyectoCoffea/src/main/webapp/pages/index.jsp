@@ -31,24 +31,31 @@
 
             application.setAttribute("carrito", cartLines); %>
         <div class="padre">
+            <div class="header">
+                <img src="../imagenes/logo.png" class="logoarr" alt="logo">
+                <div class="header-right">
+                    <a class="active" href="index.jsp">HOME</a>
+                    <a href="productos.jsp">PRODUCTS</a>
+                    <a href="sobrenosotros.html">ABOUT US</a>
+                    <div class="caja">
+                        <div class="container-1">
+                            <img src="../imagenes/lupa.png" class="lupa" alt="lupa">
+                            <input type="search" id="search" placeholder="Search..." />
+                        </div>
+                        <div class="enlaces">
+                            <a href="carrito.html"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
+                            <a href="login.html"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
+                                                      alt="iniciosesion"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="arr">
                 <div class="parteizqarr">
                     <div class="izq">
-                        <img src="../imagenes/logo.png" class="logoarr" alt="logo">
                         <img src="../imagenes/cafe1.png" class="imgizq" alt="cafe">
                     </div>
                     <div class="der">
-                        <div class="derarr">
-                            <div class="accesos">
-                                <a id="nounderline" class="accesos" href="./index.jsp">   HOME </a>
-                            </div>
-                            <div class="accesos" href="./productos.jsp">
-                                <a class="accesos" href="./productos.jsp">MENU</a>
-                            </div>
-                            <div class="accesos">
-                                <a class="accesos" href="./sobrenosotros.html">  ABOUT US </a>
-                            </div>
-                        </div>
                         <div class="derab">
                             <div class="bestseller">
                                 BEST SELLER

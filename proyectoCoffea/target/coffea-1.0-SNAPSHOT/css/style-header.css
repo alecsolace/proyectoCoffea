@@ -1,6 +1,6 @@
 .header {
   overflow: hidden;
-  background-color: #cf974b;
+  background-color: #edad53;
   font-family: 'Anton', sans-serif;
 }
 
@@ -127,4 +127,8 @@
   .enlaces {
     float: none;
   }
+}
+
+img:hover {
+  opacity: 0.7;
 }
