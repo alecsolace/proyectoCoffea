@@ -1,6 +1,5 @@
 com\sanvalero\coffea\domain\Category.class
 com\sanvalero\coffea\dao\CartLineDAO.class
-com\sanvalero\coffea\domain\Main.class
 com\sanvalero\coffea\domain\CartLine.class
 com\sanvalero\coffea\domain\Address.class
 com\sanvalero\coffea\dao\CartDAO.class

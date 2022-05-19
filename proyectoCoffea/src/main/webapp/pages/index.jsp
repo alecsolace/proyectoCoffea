@@ -23,8 +23,12 @@
     <body>
         <%
             CartLineDAO cartLinesDAO = new CartLineDAO();
-            ArrayList<CartLine> cartLines = new ArrayList<>();
-            cartLines = cartLinesDAO.getCartLines();
+            ArrayList<CartLine> cartLines = (ArrayList<CartLine>) application.getAttribute("carrito");
+            if (cartLines == null) {
+                cartLines = new ArrayList<>();
+                cartLines = cartLinesDAO.getCartLines();
+            }
+
             application.setAttribute("carrito", cartLines); %>
         <div class="padre">
             <div class="arr">
