@@ -1,4 +1,5 @@
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="com.sanvalero.coffea.domain.*" %>
 <%@page import="com.sanvalero.coffea.dao.*" %>
@@ -11,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Coffea</title>
         <link href="../css/style-home.css" rel="stylesheet" type="text/css">
-        <script src="js/script2.js"></script>
+        <script src="../js/script2.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -20,25 +21,45 @@
     </head>
 
     <body>
+        <%
+            CartLineDAO cartLinesDAO = new CartLineDAO();
+            ArrayList<CartLine> cartLines = (ArrayList<CartLine>) application.getAttribute("carrito");
+            int loggedUserID = 0;
+            if (cartLines == null) {
+                cartLines = new ArrayList<>();
+                cartLines = cartLinesDAO.getCartLines();
+            }
+            if (session.getAttribute("user") != null) {
+                loggedUserID = (int) (session.getAttribute("user"));
+            }
+
+            application.setAttribute("carrito", cartLines); %>
         <div class="padre">
+            <div class="header">
+                <img src="../imagenes/logo.png" class="logoarr" alt="logo">
+                <div class="header-right">
+                    <a class="active" href="index.jsp">HOME</a>
+                    <a href="productos.jsp">PRODUCTS</a>
+                    <a href="sobrenosotros.html">ABOUT US</a>
+                    <div class="caja">
+                        <div class="container-1">
+                            <img src="../imagenes/lupa.png" class="lupa" alt="lupa">
+                            <input type="search" id="search" placeholder="Search..." />
+                        </div>
+                        <div class="enlaces">
+                            <a href="carrito.html"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
+                            <a href="login.html"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
+                                                      alt="iniciosesion"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="arr">
                 <div class="parteizqarr">
                     <div class="izq">
-                        <img src="../imagenes/logo.png" class="logoarr" alt="logo">
                         <img src="../imagenes/cafe1.png" class="imgizq" alt="cafe">
                     </div>
                     <div class="der">
-                        <div class="derarr">
-                            <div class="accesos">
-                                <a id="nounderline" class="accesos" href="./index.jsp">   HOME </a>
-                            </div>
-                            <div class="accesos" href="./productos.jsp">
-                                <a class="accesos" href="./productos.jsp">MENU</a>
-                            </div>
-                            <div class="accesos">
-                                <a class="accesos" href="./sobrenosotros.html">  ABOUT US </a>
-                            </div>
-                        </div>
                         <div class="derab">
                             <div class="bestseller">
                                 BEST SELLER
@@ -47,11 +68,9 @@
 
                                 <%
                                     ProductDAO productDAO = new ProductDAO();
-                                    if (productDAO.getConnection() == null) {
-                                        productDAO.connect();
-                                    }
                                     ArrayList<Product> productList = productDAO.get_products();
                                     Product bestSeller = productDAO.getBestSeller();
+                                    DecimalFormat df = new DecimalFormat("0.00");
                                 %>
                                 <%= bestSeller.getName()%>
 
@@ -64,12 +83,12 @@
                                 <%= bestSeller.getDescription()%>
                             </div>
                             <div class="precioshop">
-                                $ <%= bestSeller.getPrice()%>
+                                $ <%= df.format(bestSeller.getPrice())%>
 
                                 <div class="shopnow">
-                                    SHOP NOW
-                                    <img src="../imagenes/flecha-apuntando-hacia-la-izquierda-dentro-de-un-circulo (1).png"
-                                         class="flecha" alt="flecha">
+                                    <a href="./productDetail.jsp?param=<%=bestSeller.getProductID()%>">  SHOP NOW 
+                                        <img src="../imagenes/flecha-apuntando-hacia-la-izquierda-dentro-de-un-circulo (1).png"
+                                             class="flecha" alt="flecha"></a>
                                 </div>
                             </div>
                         </div>

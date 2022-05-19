@@ -16,17 +16,17 @@ public class Product {
 
     private int productID = 0;
     private Category category;
-    private String name;
-    private String description;
+    private String name, description, image;
     private double price;
     private int stock;
 
-    public Product(Category category, String name, String description, double price, int stock) {
+    public Product(Category category, String name, String description, double price, int stock, String image) {
         this.category = category;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
+        this.image = image;
         productID++;
     }
 
@@ -37,7 +37,7 @@ public class Product {
             String cadenaConexion = "jdbc:oracle:thin:@localhost:1521/XE";
             connection = DriverManager.getConnection(cadenaConexion, "ADMIN", "ADMIN");
 
-            String createUser = "INSERT INTO PRODUCTS (PRODUCT_ID, CATEGORY_ID, NAME, DESCRIPTION, PRICE, STOCK) VALUES(?,?,?,?,?,?)";
+            String createUser = "INSERT INTO PRODUCTS (PRODUCT_ID, CATEGORY_ID, NAME, DESCRIPTION, PRICE, STOCK) VALUES(?,?,?,?,?,?, ?)";
             PreparedStatement userStatement = connection.prepareStatement(createUser);
 
             userStatement.setInt(1, this.productID);
@@ -46,6 +46,7 @@ public class Product {
             userStatement.setString(4, this.description);
             userStatement.setDouble(5, this.price);
             userStatement.setInt(6, this.stock);
+            userStatement.setString(7, this.image);
 
             filas = userStatement.executeUpdate();
             System.out.println("Se han insertado: " + filas + " filas.");
@@ -100,5 +101,13 @@ public class Product {
 
     public void setProductID(int productID) {
         this.productID = productID;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

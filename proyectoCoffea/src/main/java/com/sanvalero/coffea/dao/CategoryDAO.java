@@ -1,7 +1,5 @@
 package com.sanvalero.coffea.dao;
 
-import oracle.jdbc.driver.OracleDriver;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

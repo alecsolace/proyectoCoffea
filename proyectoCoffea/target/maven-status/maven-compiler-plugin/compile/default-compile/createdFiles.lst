@@ -1,6 +1,12 @@
 com\sanvalero\coffea\domain\Category.class
+com\sanvalero\coffea\dao\CartLineDAO.class
+com\sanvalero\coffea\domain\Main.class
+com\sanvalero\coffea\domain\CartLine.class
 com\sanvalero\coffea\domain\Address.class
+com\sanvalero\coffea\dao\CartDAO.class
 com\sanvalero\coffea\dao\CategoryDAO.class
+com\sanvalero\coffea\domain\Cart.class
+com\sanvalero\coffea\dao\CustomerDAO.class
 com\sanvalero\coffea\dao\ProductDAO.class
 com\sanvalero\coffea\dao\AddressDAO.class
 com\sanvalero\coffea\util\Util.class
