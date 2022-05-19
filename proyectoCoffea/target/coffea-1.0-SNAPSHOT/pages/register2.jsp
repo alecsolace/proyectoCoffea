@@ -34,19 +34,20 @@
             if (addressRows > 0) {
                 int customerRows = customerDAO.addUser(newCustomer);
                 if (customerRows > 0) {
+                    session.setAttribute("user", newCustomer.getUserID());
         %>
         <jsp:forward page="./index.jsp"> 
             <jsp:param name="newCustomer" value="newCustomer"/>
         </jsp:forward >
-        <%    
+        <%
         } else {
-        %>No ha creado el usuario<%        
+        %>No ha creado el usuario<%
             }
         } else {
-        %>No ha creado el Address<%        
+        %>No ha creado el Address<%
             }
         } else {
-        %> No tengo ni idea bro <%        
+        %> No tengo ni idea bro <%
             }
         %>
 

@@ -24,9 +24,13 @@
         <%
             CartLineDAO cartLinesDAO = new CartLineDAO();
             ArrayList<CartLine> cartLines = (ArrayList<CartLine>) application.getAttribute("carrito");
+            int loggedUserID = 0;
             if (cartLines == null) {
                 cartLines = new ArrayList<>();
                 cartLines = cartLinesDAO.getCartLines();
+            }
+            if (session.getAttribute("user") != null) {
+                loggedUserID = (int) (session.getAttribute("user"));
             }
 
             application.setAttribute("carrito", cartLines); %>
