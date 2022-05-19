@@ -397,3 +397,7 @@ body {
     color: #fff;
     background: #8bcac1;
 }
+
+img:hover {
+    opacity: 0.7;
+}
