@@ -37,6 +37,7 @@
                 loggedUserID = (int) (session.getAttribute("user"));
             }
             DecimalFormat df = new DecimalFormat("0.00");
+            int selectedProductID = 0;
             boolean noExiste = false;
             boolean existe = false;
             Cart cart;
@@ -44,7 +45,10 @@
             if (cartLines == null) {
                 cartLines = new ArrayList<>();
             }
-            int selectedProductID = Integer.parseInt(request.getParameter("param"));
+            if (request.getParameter("param") != null) {
+                selectedProductID = Integer.parseInt(request.getParameter("param"));
+            }
+
             for (Customer customer : customerList) {
                 if (customer.getUserID() == loggedUserID) {
 
@@ -164,7 +168,13 @@
 
                 <div class="derecha">
                     <h1 class="total">Total: <span>$<%=df.format(cart.getPrice() + (0.21 * cart.getPrice()) + 5)%> </span></h1>
-                    <a class="botonab" onclick="<% cartDAO.addCart(cart);%>">Checkout</a>
+                    <form action="addCart" method="post">
+                        <%
+                            request.setAttribute("cartLines", cartLines);
+                            request.setAttribute("finalCart", cart);
+                        %>
+                        <input type="submit"  class="botonab" value="Checkout">
+                    </form>
                 </div>
 
             </div>

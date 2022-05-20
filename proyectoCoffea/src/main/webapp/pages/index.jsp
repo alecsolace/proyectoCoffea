@@ -27,7 +27,6 @@
             int loggedUserID = 0;
             if (cartLines == null) {
                 cartLines = new ArrayList<>();
-                cartLines = cartLinesDAO.getCartLines();
             }
             if (session.getAttribute("user") != null) {
                 loggedUserID = (int) (session.getAttribute("user"));
@@ -47,9 +46,9 @@
                             <input type="search" id="search" placeholder="Search..." />
                         </div>
                         <div class="enlaces">
-                            <a href="carrito.html"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
-                            <a href="login.html"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
-                                                      alt="iniciosesion"></a>
+                            <a href="carrito.jsp"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
+                            <a href="login.jsp"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
+                                                     alt="iniciosesion"></a>
                         </div>
                     </div>
                 </div>
@@ -95,12 +94,7 @@
                     </div>
                 </div>
                 <div class="partederarr">
-                    <div class="box">
-                        <div class="container-1">
-                            <img src="../imagenes/lupa.png" class="lupa" alt="lupa">
-                            <input type="search" id="search" placeholder="Search..." />
-                        </div>
-                    </div>
+
                     <img src="../imagenes/custom_header.jpg" class="imgprincipal" alt="cafetal">
                     <div class="infoimgprincipal">
                         <h3>ETHICAL SOURCING</h3>
