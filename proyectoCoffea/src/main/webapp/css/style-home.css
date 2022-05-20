@@ -451,5 +451,6 @@ img:hover {
 }
 
 p.bestSeller.name {
+    position: relative;
     margin: 0;
 }
