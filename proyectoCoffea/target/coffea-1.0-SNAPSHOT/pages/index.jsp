@@ -47,8 +47,8 @@
                         </div>
                         <div class="enlaces">
                             <a href="carrito.jsp"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
-                            <a href="login.jsp"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
-                                                     alt="iniciosesion"></a>
+                            <a  href="<%if (loggedUserID != 0) {%><%= "profile.jsp?user=" + loggedUserID%><%} else {%><%= "login.jsp"%><%}%>"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
+                                                                                                                                                   alt="iniciosesion"></a>
                         </div>
                     </div>
                 </div>
@@ -64,19 +64,18 @@
                                 BEST SELLER
                             </div>
                             <div class="productoprincipal">
-
-                                <%
-                                    ProductDAO productDAO = new ProductDAO();
+                                <img src="../imagenes/coffeeBag.png" class="cafedelmedio"
+                                     alt="cafemedio">
+                                <%                                    ProductDAO productDAO = new ProductDAO();
                                     ArrayList<Product> productList = productDAO.get_products();
                                     Product bestSeller = productDAO.getBestSeller();
                                     DecimalFormat df = new DecimalFormat("0.00");
                                 %>
-                                <%= bestSeller.getName()%>
+                                <p class="bestSeller name"> <%= bestSeller.getName()%> </p> 
 
 
 
-                                <img src="../imagenes/coffeeBag.png" class="cafedelmedio"
-                                     alt="cafemedio">
+
                             </div>
                             <div class="infoproducto">
                                 <%= bestSeller.getDescription()%>
@@ -84,8 +83,8 @@
                             <div class="precioshop">
                                 $ <%= df.format(bestSeller.getPrice())%>
 
-                                <div class="shopnow">
-                                    <a href="./productDetail.jsp?param=<%=bestSeller.getProductID()%>">  SHOP NOW 
+                                <div class="shopnow flex">
+                                    <a class="flex" href="./productDetail.jsp?param=<%=bestSeller.getProductID()%>"> <p>SHOP NOW</p>
                                         <img src="../imagenes/flecha-apuntando-hacia-la-izquierda-dentro-de-un-circulo (1).png"
                                              class="flecha" alt="flecha"></a>
                                 </div>

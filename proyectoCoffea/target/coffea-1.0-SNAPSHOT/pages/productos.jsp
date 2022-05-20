@@ -23,29 +23,31 @@
             CategoryDAO categoryDAO = new CategoryDAO();
             ArrayList<Category> categories = categoryDAO.get_categories();
             DecimalFormat df = new DecimalFormat("0.00");
+            int loggedUserID = 0;
+            if (session.getAttribute("user") != null) {
+                loggedUserID = (int) (session.getAttribute("user"));
+            }
 
         %>
-        <header id="site-header">
-            <div class="container">
-                <a href="./index.jsp"><img src="../imagenes/logo.png" class="logoarr" alt="logo"  ></a>
-                <div class="accesos"> 
-                    <a href="./accesories"> ACCESORIES </a>
-
-                </div>
-                <div class="accesos">
-                    <a href="./productos.jsp"> MENU </a> 
-                </div>
-                <div class="accesos">
-                    ABOUT US
-                </div>
-                <div class="box">
+        <div class="header">
+            <img src="../imagenes/logo.png" class="logoarr" alt="logo">
+            <div class="header-right">
+                <a href="index.jsp">HOME</a>
+                <a class="active" href="productos.jsp">PRODUCTS</a>
+                <a href="sobrenosotros.html">ABOUT US</a>
+                <div class="caja">
                     <div class="container-1">
                         <img src="../imagenes/lupa.png" class="lupa" alt="lupa">
                         <input type="search" id="search" placeholder="Search..." />
                     </div>
+                    <div class="enlaces">
+                        <a href="carrito.jsp"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
+                        <a href="<%if (loggedUserID != 0) {%><%= "profile.jsp?user=" + loggedUserID%><%} else {%><%= "login.jsp"%><%}%>"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
+                                                                                                                                              alt="iniciosesion"></a>
+                    </div>
                 </div>
             </div>
-        </header>
+        </div>
 
         <div class="productContainer">
             <div class="titulo">
