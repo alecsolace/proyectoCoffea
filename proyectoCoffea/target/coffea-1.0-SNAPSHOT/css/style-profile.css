@@ -8,7 +8,7 @@ body {
 .header {
     overflow: hidden;
     background-color: #edad53;
-    font-family: 'Anton', sans-serif;
+    font-family: "Anton", sans-serif;
 }
 
 .header a {
@@ -85,12 +85,11 @@ body {
     -moz-border-radius: 20px;
     border-radius: 20px;
 
-
-    -webkit-transition: background .55s ease;
-    -moz-transition: background .55s ease;
-    -ms-transition: background .55s ease;
-    -o-transition: background .55s ease;
-    transition: background .55s ease;
+    -webkit-transition: background 0.55s ease;
+    -moz-transition: background 0.55s ease;
+    -ms-transition: background 0.55s ease;
+    -o-transition: background 0.55s ease;
+    transition: background 0.55s ease;
 }
 
 .enlaces {
@@ -106,7 +105,6 @@ body {
     width: 25px;
     height: auto;
 }
-
 
 @media screen and (max-width: 1189px) {
     .header .logoarr {
@@ -165,10 +163,10 @@ img:hover {
     padding-bottom: 20px;
 }
 
-.cambia {
+.cambia form input{
     background-color: #53b5aa;
     width: 400px;
-    font-family: 'Anton', sans-serif;
+    font-family: "Anton", sans-serif;
     font-size: 20px;
     text-align: center;
 }
@@ -178,26 +176,26 @@ img:hover {
     cursor: pointer;
 }
 
-.derecha{
+.derecha {
     width: 50%;
     display: flex;
     flex-direction: column;
     text-align: center;
-    font-family: 'Rajdhani', sans-serif;
+    font-family: "Rajdhani", sans-serif;
     align-items: center;
 }
 
-.derecha h1{
+.derecha h1 {
     color: #53b5aa;
 }
 
-.derecha div{
+.derecha div {
     margin-bottom: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-.dato{
+.dato {
     width: 500px;
     height: auto;
     background-color: #f4e6cc;
@@ -223,7 +221,7 @@ img:hover {
     background-color: #20161f;
     width: 100%;
     height: auto;
-    font-family: 'Rajdhani', sans-serif;
+    font-family: "Rajdhani", sans-serif;
     font-size: 30px;
     color: white;
     text-align: center;
@@ -268,7 +266,7 @@ img:hover {
     font-size: 1.1rem;
     width: 22px;
     height: auto;
-    transition: color .4s ease;
+    transition: color 0.4s ease;
 }
 
 .separador2 {
@@ -284,9 +282,63 @@ img:hover {
 }
 
 @media screen and (max-width: 950px) {
-    .container{
+    .container {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+}
+
+.orders {
+    width: 90%;
+    margin-bottom: 2rem;
+}
+.orderItem {
+    width: 100%;
+    display: flex;
+}
+
+.square {
+    width: 20%;
+
+    flex-grow: 1;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.summ {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lines {
+    width: 60%;
+}
+.orderLine {
+    height: 100%;
+    flex-grow: 5;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.border {
+    border: 1px solid black;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.orders h1 {
+    font-family: "Rajdhani", sans-serif;
+    text-transform: uppercase;
+    color: #53b5aa;
 }

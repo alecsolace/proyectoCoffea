@@ -1,3 +1,4 @@
+<%@page import="java.text.DateFormat"%>
 <%@page import="com.sanvalero.coffea.domain.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sanvalero.coffea.dao.*"%>
@@ -33,6 +34,10 @@
 
             if (loggedCustomer != null) {
                 CartDAO cartDAO = new CartDAO();
+                CartLineDAO cartLineDAO = new CartLineDAO();
+                ProductDAO productDAO = new ProductDAO();
+                ArrayList<Product> productList = productDAO.get_products();
+                ArrayList<CartLine> cartLineList = cartLineDAO.getCartLines();
                 ArrayList<Cart> cartList = cartDAO.getCarts();
                 for (Cart cart : cartList) {
                     if (cart.getCustomer().getUserID() == loggedCustomer.getUserID()) {
@@ -42,7 +47,7 @@
                 AddressDAO addressDAO = new AddressDAO();
                 ArrayList<Address> addressList = addressDAO.getAddresses();
                 for (Address address : addressList) {
-                    if (address.getAddressID() == loggedCustomer.getAddress().getAddressID()) {
+                    if (loggedCustomer.getUserID() == address.getCustomer().getUserID()) {
                         customerAddresses.add(address);
                     }
                 }
@@ -66,35 +71,85 @@
                 </div>
             </div>
         </div>
+        <div class="info">
+            <div class="container">
+                <div class="izquierda">
+                    <img src="../imagenes/foto_perfil.jpg" class="fotoperfil" alt="fotoperfil">
+                    <div class="cambia">
+                        <form action="index.jsp?param=<%=loggedCustomer.getUserID()%>" method="post">
+                            <input type="submit" value="Do you want to delete your account?" name="name">
+                        </form>
+                    </div>
+                </div>
+                <div class="derecha">
+                    <h1>INFORMATION</h1>
+                    <div class="dato">
+                        FIRST NAME: <%= loggedCustomer.getName()%>
+                    </div>
+                    <div class="dato">
+                        LAST NAME: <%= loggedCustomer.getLastName()%>
+                    </div>
+                    <div class="dato">
+                        EMAIL: <%= loggedCustomer.getEmail()%>
+                    </div>
+                    <div class="dato">
+                        LOCATION: <% for (Address customerAddress : customerAddresses) {
+                        %> <%= customerAddress.getStreetName() + " " + customerAddress.getStreetNumber() + " " + customerAddress.getAppartment()%> <%
+                            }
+                        %>
+                    </div>
+                    <div class="dato">
+                        NUMBER OF ORDERS: <%= orders%>
+                    </div>
+                    <div class="cambia">
+                        <form action="index.jsp?logout=<%=loggedCustomer.getUserID()%>" method="post">
+                            <input type="submit" value="Log Out." name="name">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% if (orders > 0) { %>
 
-        <div class="container">
-            <div class="izquierda">
-                <img src="../imagenes/foto_perfil.jpg" class="fotoperfil" alt="fotoperfil">
-                <div class="cambia">
-                    Change your photo here!
+            <div class="orders">
+                <h1>My Orders:</h1>
+                <% for (Cart cart : cartList) {
+                        if (cart.getCustomer().getUserID() == loggedCustomer.getUserID()) {
+                %>
+                <div class  
+                     ="orderItem dato">
+                    <div 
+                        class  
+                        ="square border title">
+                        <h2>Order<%=cart.getCartID()%> </h2>
+                    </div>
+                    <div class="lines">
+                        <% for (CartLine cartLine : cartLineList) {
+                                if (cartLine.getCart().getCartID() == cart.getCartID()) {
+                                    for (Product product : productList) {
+                                        if (product.getProductID() == cartLine.getProduct().getProductID()) {
+
+
+                        %>
+                        <div class="orderLine border">
+                            <p  class="productName"><%= product.getName()%></p>
+                            <p class="quantity"><%=cartLine.getQuantity()%></p>
+                            <p class="price">$<%=cartLine.getPrice()%></p> 
+                        </div> 
+                        <%   }
+
+                                    }
+                                }
+                            }%>
+                    </div>
+                    <div class="summ border square">
+                        <p class="bold"><%= cart.getOrderDate().toString()%></p>
+                        <p class="price">$<%= cart.getPrice()%></p>
+                    </div>
                 </div>
             </div>
-            <div class="derecha">
-                <h1>INFORMATION</h1>
-                <div class="dato">
-                    FIRST NAME: <%= loggedCustomer.getName()%>
-                </div>
-                <div class="dato">
-                    LAST NAME: <%= loggedCustomer.getLastName()%>
-                </div>
-                <div class="dato">
-                    EMAIL: <%= loggedCustomer.getEmail()%>
-                </div>
-                <div class="dato">
-                    LOCATION: <% for (Address customerAddress : customerAddresses) {
-                    %> <%= customerAddress.getStreetName() + " " + customerAddress.getStreetNumber() + " " + customerAddress.getAppartment()%> <%
-                        }
-                    %>
-                </div>
-                <div class="dato">
-                    NUMBER OF ORDERS: <%= orders%>
-                </div>
-            </div>
+            <%  }
+                    }
+                }%>
         </div>
 
         <div class="abajo">

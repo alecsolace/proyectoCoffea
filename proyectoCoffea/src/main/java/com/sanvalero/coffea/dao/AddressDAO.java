@@ -93,27 +93,31 @@ public class AddressDAO {
         return rows;
     }
 
-    public void removeAddress(int id) {
+    public int removeAddress(int id) {
         boolean worked = false;
-
+        int rows = 0;
         try {
             String query = "DELETE FROM ADDRESS WHERE ADDRESS_ID = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, id);
-            int filas = stmt.executeUpdate();
-            if (filas > 0) {
+            rows = stmt.executeUpdate();
+            if (rows > 0) {
                 worked = true;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
+        Address deletingAddress = null;
         if (worked) {
             for (Address address : addresses) {
                 if (address.getAddressID() == id) {
-                    addresses.remove(address);
+                    deletingAddress = address;
                 }
             }
+            if (deletingAddress != null) {
+                addresses.remove(deletingAddress);
+            }
         }
+        return rows;
     }
 }

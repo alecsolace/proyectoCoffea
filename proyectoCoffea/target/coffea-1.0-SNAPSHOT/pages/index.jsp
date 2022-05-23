@@ -25,14 +25,52 @@
             CartLineDAO cartLinesDAO = new CartLineDAO();
             ArrayList<CartLine> cartLines = (ArrayList<CartLine>) application.getAttribute("carrito");
             int loggedUserID = 0;
-            if (cartLines == null) {
+
+            if (request.getParameter("logout") != null) {
+                session.setAttribute("user", null);
+            }
+
+            if (request.getParameter("param") != null) {
+                CustomerDAO customerDAO = new CustomerDAO();
+                AddressDAO addressDAO = new AddressDAO();
+                int deletingUserID = Integer.parseInt(request.getParameter("param"));
+                int rows = 0;
+                Address deletingAddress = null;
+                for (Address address : addressDAO.getAddresses()) {
+                    if (address.getCustomer().getUserID() == deletingUserID) {
+                        deletingAddress = address;
+                    }
+                }
+                if (deletingAddress != null) {
+                    rows = addressDAO.removeAddress(deletingAddress.getAddressID());
+                } else {
+
+                }
+                if (rows > 0) {
+                    rows = customerDAO.removeCustomer(deletingUserID);
+                } else {
+
+                }
+                if (rows > 0) {
+        %>
+        <div class="deleteMessage">The user was successfully deleted</div>
+
+        <%
+                }
+
+            }
+            if (cartLines
+                    == null) {
                 cartLines = new ArrayList<>();
             }
-            if (session.getAttribute("user") != null) {
+
+            if (session.getAttribute(
+                    "user") != null) {
                 loggedUserID = (int) (session.getAttribute("user"));
             }
 
-            application.setAttribute("carrito", cartLines); %>
+            application.setAttribute(
+                    "carrito", cartLines); %>
         <div class="padre">
             <div class="header">
                 <img src="../imagenes/logo.png" class="logoarr" alt="logo">
@@ -47,8 +85,9 @@
                         </div>
                         <div class="enlaces">
                             <a href="carrito.jsp"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
-                            <a  href="<%if (loggedUserID != 0) {%><%= "profile.jsp?user=" + loggedUserID%><%} else {%><%= "login.jsp"%><%}%>"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
-                                                                                                                                                   alt="iniciosesion"></a>
+                            <a  href="<%if (loggedUserID
+                                        != 0) {%><%= "profile.jsp?user=" + loggedUserID%><%} else {%><%= "login.jsp"%><%}%>"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
+                                   alt="iniciosesion"></a>
                         </div>
                     </div>
                 </div>
