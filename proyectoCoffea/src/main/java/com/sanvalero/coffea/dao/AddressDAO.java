@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.sanvalero.coffea.domain.Address;
+import com.sanvalero.coffea.domain.Customer;
 
 public class AddressDAO {
 
@@ -56,11 +57,20 @@ public class AddressDAO {
         Statement statement = connection.createStatement();
         ResultSet results = statement.executeQuery(query);
         ArrayList<Address> addressList = new ArrayList<>();
+        CustomerDAO customerDAO = new CustomerDAO();
+        ArrayList<Customer> customerList = customerDAO.getCustomers();
+
         while (results.next()) {
-            Address address = new Address(results.getString("STREET_NAME"), results.getInt("STREET_NUMBER"),
-                    results.getString("APPARTMENT"));
-            address.setAddressID(results.getInt("ADDRESS_ID"));
-            addressList.add(address);
+            for (Customer customer : customerList) {
+                if (results.getInt("CUSTOMER_ID") == customer.getUserID()) {
+
+                    Address address = new Address(customer, results.getString("STREET_NAME"),
+                            results.getInt("STREET_NUMBER"),
+                            results.getString("APPARTMENT"));
+                    address.setAddressID(results.getInt("ADDRESS_ID"));
+                    addressList.add(address);
+                }
+            }
         }
         return addressList;
     }
@@ -68,13 +78,14 @@ public class AddressDAO {
     public int addAddress(Address adress) {
         int rows = 0;
         try {
-            String sql = "INSERT INTO ADDRESS (ADDRESS_ID, STREET_NAME, STREET_NUMBER, APPARTMENT) "
-                    + "VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO ADDRESS (ADDRESS_ID, CUSTOMER_ID, STREET_NAME, STREET_NUMBER, APPARTMENT) "
+                    + "VALUES (?, ?, ?, ?, ?)";
             PreparedStatement sentencia = connection.prepareStatement(sql);
             sentencia.setInt(1, adress.getAddressID());
-            sentencia.setString(2, adress.getStreetName());
-            sentencia.setInt(3, adress.getStreetNumber());
-            sentencia.setString(4, adress.getAppartment());
+            sentencia.setInt(2, adress.getCustomer().getUserID());
+            sentencia.setString(3, adress.getStreetName());
+            sentencia.setInt(4, adress.getStreetNumber());
+            sentencia.setString(5, adress.getAppartment());
             rows = sentencia.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
