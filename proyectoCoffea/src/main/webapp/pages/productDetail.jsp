@@ -28,41 +28,43 @@
             DecimalFormat df = new DecimalFormat("0.00");
             int selectedProductID = Integer.parseInt(request.getParameter("param"));
             int cont = 1;
+            int loggedUserID = 0;
+            if (session.getAttribute("user") != null) {
+                loggedUserID = (int) (session.getAttribute("user"));
+            }
             for (Product product : products) {
                 if (product.getProductID() == selectedProductID) {
 
                     for (Category category : categories) {
                         if (category.getCategoryID() == product.getCategory().getCategoryID()) {
         %>
-        <header id="arriba">
-            <div class="containerarr">
-                <img src="../imagenes/logo.png" class="logoarr" alt="logo">
-                <div class="accesos"> 
-                    <a class="linkAccesos" href="./accesories"> ACCESORIES </a>
-
-                </div>
-                <div class="accesos">
-                    <a class="linkAccesos" href="./productos.jsp"> MENU </a> 
-                </div>
-                <div class="accesos">
-                    <a class="linkAccesos" href="./sobrenosotros.html"> ABOUT US </a>
-                </div>
+        <div class="header">
+            <img src="../imagenes/logo.png" class="logoarr" alt="logo">
+            <div class="header-right">
+                <a href="index.jsp">HOME</a>
+                <a href="productos.jsp">PRODUCTS</a>
+                <a href="sobrenosotros.html">ABOUT US</a>
                 <div class="caja">
                     <div class="container-1">
                         <img src="../imagenes/lupa.png" class="lupa" alt="lupa">
                         <input type="search" id="search" placeholder="Search..." />
                     </div>
+                    <div class="enlaces">
+                        <a href="carrito.jsp"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
+                        <a href="<%if (loggedUserID != 0) {%><%= "profile.jsp?user=" + loggedUserID%><%} else {%><%= "login.jsp"%><%}%>"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
+                                                                                                                                              alt="iniciosesion"></a>
+                    </div>
                 </div>
             </div>
-        </header>
+        </div>
         <main>
             <div class="container">
                 <div class="grid navegacion">
                     <div class="ruta">
                         <nav>
                             <ol class="listaruta">
-                                <li class="sitioruta"><a class="linkRuta" href="./index.jsp">Home</a></li>
-                                <li class="sitioruta"><a class="linkRuta" href="./productos.jsp"> Products</a></li>
+                                <li class="sitioruta"><a id="linkRuta" href="./index.jsp">Home</a></li>
+                                <li class="sitioruta"><a id="linkRuta" href="./productos.jsp"> Products</a></li>
                                 <li class="sitioruta activa"><%= product.getName()%></li>
                             </ol>
                         </nav>

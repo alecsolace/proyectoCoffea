@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.sanvalero.coffea.domain.*"%>
@@ -19,6 +22,8 @@
     <body>
         <%
             CartLineDAO cartLinesDAO = new CartLineDAO();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date(System.currentTimeMillis());
 
             ProductDAO productDAO = new ProductDAO();
             ArrayList<Product> productList = productDAO.get_products();
@@ -26,8 +31,13 @@
             cartLines = (ArrayList<CartLine>) application.getAttribute("carrito");
             CartDAO cartDAO = new CartDAO();
             CustomerDAO customerDAO = new CustomerDAO();
+            int loggedUserID = 1;
             ArrayList<Customer> customerList = customerDAO.getCustomers();
+            if (session.getAttribute("user") != null) {
+                loggedUserID = (int) (session.getAttribute("user"));
+            }
             DecimalFormat df = new DecimalFormat("0.00");
+            int selectedProductID = 0;
             boolean noExiste = false;
             boolean existe = false;
             Cart cart;
@@ -35,11 +45,14 @@
             if (cartLines == null) {
                 cartLines = new ArrayList<>();
             }
-            int selectedProductID = Integer.parseInt(request.getParameter("param"));
-            for (Customer customer : customerList) {
-                if (customer.getUserID() == 1) {
+            if (request.getParameter("param") != null) {
+                selectedProductID = Integer.parseInt(request.getParameter("param"));
+            }
 
-                    cart = new Cart(cartDAO.getCarts().size(), customer, totalPrice, new Date(2022, 02, 24));
+            for (Customer customer : customerList) {
+                if (customer.getUserID() == loggedUserID) {
+
+                    cart = new Cart(cartDAO.getCarts().size(), customer, totalPrice, date);
 
                     for (Product productS : productList) {
 
@@ -155,7 +168,13 @@
 
                 <div class="derecha">
                     <h1 class="total">Total: <span>$<%=df.format(cart.getPrice() + (0.21 * cart.getPrice()) + 5)%> </span></h1>
-                    <a class="botonab">Checkout</a>
+                    <form action="addCart" method="post">
+                        <%
+                            request.setAttribute("cartLines", cartLines);
+                            request.setAttribute("finalCart", cart);
+                        %>
+                        <input type="submit"  class="botonab" value="Checkout">
+                    </form>
                 </div>
 
             </div>

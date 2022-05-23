@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import com.sanvalero.coffea.domain.Address;
 import com.sanvalero.coffea.domain.Customer;
 
 public class CustomerDAO {
@@ -59,7 +57,7 @@ public class CustomerDAO {
      * Adds a customer to the database
      *
      * @param customer
-     * @param movie The customer with the information you want to add
+     * @param movie    The customer with the information you want to add
      * @return
      * @throws SQLException
      */
@@ -67,16 +65,15 @@ public class CustomerDAO {
         int status = 0;
         try {
 
-            String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, ADDRESS_ID, NAME, LAST_NAME, EMAIL, PASSWORD) "
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, NAME, LAST_NAME, EMAIL, PASSWORD) "
+                    + "VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement sentencia = connection.prepareStatement(sql);
             sentencia.setInt(1, customer.getUserID());
-            sentencia.setInt(2, customer.getAddress().getAddressID());
-            sentencia.setString(3, customer.getName());
-            sentencia.setString(4, customer.getLastName());
-            sentencia.setString(5, customer.getEmail());
-            sentencia.setString(6, customer.getPassword());
+            sentencia.setString(2, customer.getName());
+            sentencia.setString(3, customer.getLastName());
+            sentencia.setString(4, customer.getEmail());
+            sentencia.setString(5, customer.getPassword());
             status = sentencia.executeUpdate();
             return status;
         } catch (SQLException e) {
@@ -97,19 +94,13 @@ public class CustomerDAO {
         Statement statement = connection.createStatement();
         ResultSet results = statement.executeQuery(query);
         ArrayList<Customer> customerList = new ArrayList<>();
-        AddressDAO addressDAO = new AddressDAO();
-        ArrayList<Address> addresses = addressDAO.getAddresses();
         while (results.next()) {
-            int address_ID = results.getInt("ADDRESS_ID");
-            for (Address address : addresses) {
-                if (address.getAddressID() == address_ID) {
-                    Customer customer = new Customer(address, results.getString("NAME"),
-                            results.getString("LAST_NAME"), results.getString("EMAIL"), results.getString("PASSWORD"));
-                    customer.setUserID(results.getInt("CUSTOMER_ID"));
-                    customerList.add(customer);
-                    break;
-                }
-            }
+
+            Customer customer = new Customer(results.getString("NAME"),
+                    results.getString("LAST_NAME"), results.getString("EMAIL"), results.getString("PASSWORD"));
+            customer.setUserID(results.getInt("CUSTOMER_ID"));
+            customerList.add(customer);
+
         }
         return customerList;
     }
@@ -151,10 +142,6 @@ public class CustomerDAO {
      */
     public void modifyCustomer(Customer customer) {
         // TODO
-    }
-
-    public Connection getConnection() {
-        return connection;
     }
 
 }

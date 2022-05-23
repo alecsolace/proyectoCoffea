@@ -27,7 +27,6 @@
             int loggedUserID = 0;
             if (cartLines == null) {
                 cartLines = new ArrayList<>();
-                cartLines = cartLinesDAO.getCartLines();
             }
             if (session.getAttribute("user") != null) {
                 loggedUserID = (int) (session.getAttribute("user"));
@@ -47,9 +46,9 @@
                             <input type="search" id="search" placeholder="Search..." />
                         </div>
                         <div class="enlaces">
-                            <a href="carrito.html"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
-                            <a href="login.html"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
-                                                      alt="iniciosesion"></a>
+                            <a href="carrito.jsp"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
+                            <a  href="<%if (loggedUserID != 0) {%><%= "profile.jsp?user=" + loggedUserID%><%} else {%><%= "login.jsp"%><%}%>"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
+                                                                                                                                                   alt="iniciosesion"></a>
                         </div>
                     </div>
                 </div>
@@ -65,19 +64,18 @@
                                 BEST SELLER
                             </div>
                             <div class="productoprincipal">
-
-                                <%
-                                    ProductDAO productDAO = new ProductDAO();
+                                <img src="../imagenes/coffeeBag.png" class="cafedelmedio"
+                                     alt="cafemedio">
+                                <%                                    ProductDAO productDAO = new ProductDAO();
                                     ArrayList<Product> productList = productDAO.get_products();
                                     Product bestSeller = productDAO.getBestSeller();
                                     DecimalFormat df = new DecimalFormat("0.00");
                                 %>
-                                <%= bestSeller.getName()%>
+                                <p class="bestSeller name"> <%= bestSeller.getName()%> </p> 
 
 
 
-                                <img src="../imagenes/coffeeBag.png" class="cafedelmedio"
-                                     alt="cafemedio">
+
                             </div>
                             <div class="infoproducto">
                                 <%= bestSeller.getDescription()%>
@@ -85,8 +83,8 @@
                             <div class="precioshop">
                                 $ <%= df.format(bestSeller.getPrice())%>
 
-                                <div class="shopnow">
-                                    <a href="./productDetail.jsp?param=<%=bestSeller.getProductID()%>">  SHOP NOW 
+                                <div class="shopnow flex">
+                                    <a class="flex" href="./productDetail.jsp?param=<%=bestSeller.getProductID()%>"> <p>SHOP NOW</p>
                                         <img src="../imagenes/flecha-apuntando-hacia-la-izquierda-dentro-de-un-circulo (1).png"
                                              class="flecha" alt="flecha"></a>
                                 </div>
@@ -95,12 +93,7 @@
                     </div>
                 </div>
                 <div class="partederarr">
-                    <div class="box">
-                        <div class="container-1">
-                            <img src="../imagenes/lupa.png" class="lupa" alt="lupa">
-                            <input type="search" id="search" placeholder="Search..." />
-                        </div>
-                    </div>
+
                     <img src="../imagenes/custom_header.jpg" class="imgprincipal" alt="cafetal">
                     <div class="infoimgprincipal">
                         <h3>ETHICAL SOURCING</h3>
