@@ -40,8 +40,10 @@
         </jsp:forward >
         <%
             }
-
+            if (!loggedIn && request.getParameter("email") != null && request.getParameter("password") != null) {
         %>
+        <div class="deleteMessage">The email and password entered do not match with any registered users</div>
+        <%} %>
         <div class="container">
             <div class="detras">
                 <div class="loginMsg">

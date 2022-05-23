@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author aaguirrem
  */
-@WebServlet(name = "addCart", urlPatterns = {"/addCart"})
+@WebServlet(name = "/addCart", urlPatterns = {"/addCart"})
 public class addCart extends HttpServlet {
 
     /**

@@ -1,6 +1,15 @@
 body {
     margin: 0px;
 }
+
+.deleteMessage{
+    width: 100%;
+    background-color: #ff4e00;
+    text-transform: uppercase;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
 .padre {
     height: auto;
     display: row;

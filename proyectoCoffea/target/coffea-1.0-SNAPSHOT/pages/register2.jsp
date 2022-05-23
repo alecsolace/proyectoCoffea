@@ -21,19 +21,17 @@
     <body>
         <%
             CustomerDAO customerDAO = new CustomerDAO();
-            Customer newCustomer = (Customer) session.getAttribute("newCustomer");
+            Customer newCustomer = (Customer) session.getAttribute("registeringCustomer");
             newCustomer.setUserID(customerDAO.getCustomers().size() + 1);
             AddressDAO addressDAO = new AddressDAO();
             if (request.getParameter("direccion") != null && request.getParameter("numero") != null && request.getParameter("cp") != null) {
-                Address newAddress = new Address(request.getParameter("direccion"), Integer.parseInt(request.getParameter("numero")), request.getParameter("cp"));
-                newCustomer.setAddress(newAddress);
-        %>El CustomerID = <%= newCustomer.getUserID()%> 
-        El AddressID = <%= newCustomer.getAddress().getAddressID()%> 
-        El Nombre = <%= newCustomer.getName()%> 
-        <% int addressRows = addressDAO.addAddress(newAddress);
-            if (addressRows > 0) {
-                int customerRows = customerDAO.addUser(newCustomer);
-                if (customerRows > 0) {
+                Address newAddress = new Address(newCustomer, request.getParameter("direccion"), Integer.parseInt(request.getParameter("numero")), request.getParameter("cp"));
+        %> 
+        <%
+            int customerRows = customerDAO.addUser(newCustomer);
+            if (customerRows > 0) {
+                int addressRows = addressDAO.addAddress(newAddress);
+                if (addressRows > 0) {
                     session.setAttribute("user", newCustomer.getUserID());
         %>
         <jsp:forward page="./index.jsp"> 

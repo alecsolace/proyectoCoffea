@@ -2,7 +2,14 @@ body {
     background-color: #20161f;
     font-family: 'Rajdhani', sans-serif;
 }
-
+.deleteMessage{
+    width: 100%;
+    background-color: #ff4e00;
+    text-transform: uppercase;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
 .container {
     width: 600px;
     height: 350px;

@@ -57,7 +57,7 @@ public class CustomerDAO {
      * Adds a customer to the database
      *
      * @param customer
-     * @param movie    The customer with the information you want to add
+     * @param movie The customer with the information you want to add
      * @return
      * @throws SQLException
      */
@@ -110,29 +110,33 @@ public class CustomerDAO {
      *
      * @param id El id de la pelicula a eliminar
      */
-    public void removeCustomer(int id) {
+    public int removeCustomer(int id) {
 
         boolean worked = false;
-
+        int filas = 0;
         try {
             String query = "DELETE FROM CUSTOMERS WHERE CUSTOMER_ID = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, id);
-            int filas = stmt.executeUpdate();
+            filas = stmt.executeUpdate();
             if (filas > 0) {
                 worked = true;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
+        Customer deletingCustomer = null;
         if (worked) {
             for (Customer customer : customers) {
                 if (customer.getUserID() == id) {
-                    customers.remove(customer);
+                    deletingCustomer = customer;
                 }
             }
+            if (deletingCustomer != null) {
+                customers.remove(deletingCustomer);
+            }
         }
+        return filas;
     }
 
     /**

@@ -27,7 +27,7 @@
 
                         if (!request.getParameter("email").equals(customer.getEmail())) {
                             newCustomer = new Customer(request.getParameter("firstname"), request.getParameter("lastname"), request.getParameter("email"), request.getParameter("password"));
-                            session.setAttribute("newCustomer", newCustomer); %>
+                            session.setAttribute("registeringCustomer", newCustomer); %>
         <jsp:forward page="./register2.jsp"> 
             <jsp:param name="newCustomer" value="newCustomer"/>
         </jsp:forward >
