@@ -118,10 +118,9 @@
                 %>
                 <article class="producto">
                     <header>
-                        <a class="eliminado">
+                        <a class="eliminado" href="./productDetail.jsp?param=<%=product.getProductID()%>">
                             <img src="<%=product.getImage()%>" alt="">
 
-                            <h3>Remove product</h3>
                         </a>
                     </header>
 
@@ -134,9 +133,7 @@
                     </div>
 
                     <footer class="contenido">
-                        <span class="menos">-</span>
                         <span class="cant"><%=cartLineProduct.getQuantity()%></span>
-                        <span class="mas">+</span>
 
                         <h2 class="preciototal">
                             $<%= df.format(product.getPrice() * cartLineProduct.getQuantity())%>
@@ -168,7 +165,7 @@
 
                 <div class="derecha">
                     <h1 class="total">Total: <span>$<%=df.format(cart.getPrice() + (0.21 * cart.getPrice()) + 5)%> </span></h1>
-                    <form action="addCart" method="post">
+                    <form action="NewServlet" method="POST">
                         <%
                             request.setAttribute("cartLines", cartLines);
                             request.setAttribute("finalCart", cart);
