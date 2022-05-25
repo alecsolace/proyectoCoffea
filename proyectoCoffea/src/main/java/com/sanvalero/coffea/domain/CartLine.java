@@ -2,7 +2,7 @@ package com.sanvalero.coffea.domain;
 
 public class CartLine {
 
-    private int cartLineID = 0;
+    private int cartLineID = 1;
     private Product product;
     private Cart cart;
     private int quantity;
@@ -14,6 +14,22 @@ public class CartLine {
         this.cart = cart;
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public CartLine(Product product, Cart cart, int quantity, double price) {
+        this.product = product;
+        this.cart = cart;
+        this.quantity = quantity;
+        this.price = price;
+        cartLineID++;
+    }
+
+    public CartLine(Product product, int quantity, double price) {
+        this.product = product;
+
+        this.quantity = quantity;
+        this.price = price;
+        cartLineID++;
     }
 
     public CartLine(int cartLineID, Product product, int quantity, double price) {

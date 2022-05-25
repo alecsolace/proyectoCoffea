@@ -115,18 +115,17 @@
                 <% for (Cart cart : cartList) {
                         if (cart.getCustomer().getUserID() == loggedCustomer.getUserID()) {
                 %>
-                <div class  
-                     ="orderItem dato">
+                <div class="orderItem dato">
                     <div 
-                        class  
-                        ="square border title">
-                        <h2>Order<%=cart.getCartID()%> </h2>
+                        class="square border title">
+                        <h2>Order <%=cart.getCartID()%> </h2>
                     </div>
                     <div class="lines">
-                        <% for (CartLine cartLine : cartLineList) {
-                                if (cartLine.getCart().getCartID() == cart.getCartID()) {
-                                    for (Product product : productList) {
-                                        if (product.getProductID() == cartLine.getProduct().getProductID()) {
+                        <% if (cartLineList != null && cartLineList.size() > 0) {
+                                for (CartLine cartLine : cartLineList) {
+                                    if (cartLine.getCart().getCartID() == cart.getCartID()) {
+                                        for (Product product : productList) {
+                                            if (product.getProductID() == cartLine.getProduct().getProductID()) {
 
 
                         %>
@@ -137,6 +136,7 @@
                         </div> 
                         <%   }
 
+                                        }
                                     }
                                 }
                             }%>
@@ -146,10 +146,11 @@
                         <p class="price">$<%= cart.getPrice()%></p>
                     </div>
                 </div>
+
+                <%  }
+                        }
+                    }%>
             </div>
-            <%  }
-                    }
-                }%>
         </div>
 
         <div class="abajo">

@@ -1,3 +1,4 @@
+<%@page import="java.io.IOException"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -21,6 +22,7 @@
     </head>
     <body>
         <%
+
             CartLineDAO cartLinesDAO = new CartLineDAO();
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date(System.currentTimeMillis());
@@ -30,12 +32,14 @@
             ArrayList<CartLine> cartLines;
             cartLines = (ArrayList<CartLine>) application.getAttribute("carrito");
             CartDAO cartDAO = new CartDAO();
+            CartLineDAO cartLineDAO = new CartLineDAO();
             CustomerDAO customerDAO = new CustomerDAO();
             int loggedUserID = 1;
             ArrayList<Customer> customerList = customerDAO.getCustomers();
             if (session.getAttribute("user") != null) {
                 loggedUserID = (int) (session.getAttribute("user"));
             }
+            int cont = 2;
             DecimalFormat df = new DecimalFormat("0.00");
             int selectedProductID = 0;
             boolean noExiste = false;
@@ -52,7 +56,7 @@
             for (Customer customer : customerList) {
                 if (customer.getUserID() == loggedUserID) {
 
-                    cart = new Cart(cartDAO.getCarts().size(), customer, totalPrice, date);
+                    Cart newCart = new Cart(cartDAO.getCarts().size() + 1, customer, totalPrice, date);
 
                     for (Product productS : productList) {
 
@@ -70,22 +74,23 @@
                                 }
                                 if (noExiste && !existe) {
                                     Product productAdded = productS;
-                                    CartLine newCartLine = new CartLine((cartLines.size() + 1), productAdded, 1,
+                                    CartLine newCartLine = new CartLine((cartLines.size() + 1 + cartLineDAO.getCartLines().size()), productAdded, 1,
                                             productAdded.getPrice());
+                                    newCartLine.setCart(newCart);
                                     cartLines.add(newCartLine);
                                     application.setAttribute("carrito", cartLines);
                                 }
                             } else {
                                 Product productAdded = productS;
-                                CartLine newCartLine = new CartLine((cartLines.size() + 1), productAdded, 1,
+                                CartLine newCartLine = new CartLine((cartLines.size() + 1 + cartLineDAO.getCartLines().size()), productAdded, 1,
                                         productAdded.getPrice());
+                                newCartLine.setCart(newCart);
                                 cartLines.add(newCartLine);
                                 application.setAttribute("carrito", cartLines);
                             }
                         }
 
                     }
-
 
         %>
 
@@ -101,8 +106,9 @@
                         <input type="search" id="search" placeholder="Search..." />
                     </div>
                     <div class="enlaces">
-                        <a href="carrito.html"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
-                        <a href="login.html"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion" alt="iniciosesion"></a>
+                        <a href="carrito.jsp"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
+                        <a  href="<%if (loggedUserID != 0) {%><%= "profile.jsp?user=" + loggedUserID%><%} else {%><%= "login.jsp"%><%}%>"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
+                                                                                                                                               alt="iniciosesion"></a>
                     </div>
                 </div>
             </div>
@@ -153,32 +159,33 @@
             </section>
 
         </div>
-        <% cart.setPrice(totalPrice);%>
+        <% newCart.setPrice(totalPrice);%>
         <footer id="abajo">
             <div class="container fix">
 
                 <div class="izquierda">
-                    <h2 class="subtotal">Subtotal: <span>$<%= df.format(cart.getPrice())%> </span></h2>
-                    <h3 class="tax">Taxes (10%): <span>$<%= df.format(0.1 * cart.getPrice())%> </span></h3>
+                    <h2 class="subtotal">Subtotal: <span>$<%= df.format(newCart.getPrice())%> </span></h2>
+                    <h3 class="tax">Taxes (10%): <span>$<%= df.format(0.1 * newCart.getPrice())%> </span></h3>
                     <h3 class="shipping">Shipping: <span>$5.00</span></h3>
                 </div>
 
                 <div class="derecha">
-                    <h1 class="total">Total: <span>$<%=df.format(cart.getPrice() + (0.21 * cart.getPrice()) + 5)%> </span></h1>
-                    <form action="NewServlet" method="POST">
-                        <%
-                            request.setAttribute("cartLines", cartLines);
-                            request.setAttribute("finalCart", cart);
-                        %>
-                        <input type="submit"  class="botonab" value="Checkout">
-                    </form>
+                    <h1 class="total">Total: <span>$<%=df.format(newCart.getPrice() + (0.21 * newCart.getPrice()) + 5)%> </span></h1>
+
+                    <a class="botonab" href="./index.jsp?checkout=true">CHECKOUT</a>
                 </div>
 
             </div>
         </footer>
         <%
+                    session.setAttribute("finalCart", newCart);
+
                 }
+
             }
+            session.setAttribute("cartLines", cartLines);
+
         %>
+        Sale
     </body>
 </html>

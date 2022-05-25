@@ -22,15 +22,54 @@
 
     <body>
         <%
+
+            if (request.getParameter("checkout") != null) {
+                ArrayList<CartLine> cartLinesCheckout = new ArrayList<>();
+                cartLinesCheckout = (ArrayList<CartLine>) session.getAttribute("cartLines");
+                Cart cartCheckout = null;
+                cartCheckout = (Cart) session.getAttribute("finalCart");
+                CartDAO cartDAO = new CartDAO();
+                CartLineDAO cartLineDAO = new CartLineDAO();
+                int insertedLines = 0;
+
+                if (cartLinesCheckout != null && !cartLinesCheckout.isEmpty() && cartCheckout != null) {
+                    insertedLines = cartDAO.addCart(cartCheckout);
+                    if (insertedLines > 0) {
+
+                        for (CartLine cartLine : cartLinesCheckout) {
+                            cartLineDAO.addCartLine(cartLine);
+                        }
+                    }
+                }
+
+                if (insertedLines > 0) {
+                    application.setAttribute("carrito", null);
+
+        %>
+        <jsp:forward page="./index.jsp"> 
+            <jsp:param name="status" value="ok"/>
+        </jsp:forward >
+        <%        } else {
+        %>
+        <jsp:forward page="./carrito.jsp"> 
+            <jsp:param name="status" value="error"/>
+        </jsp:forward >
+        <%
+                }
+
+            }
+
             CartLineDAO cartLinesDAO = new CartLineDAO();
             ArrayList<CartLine> cartLines = (ArrayList<CartLine>) application.getAttribute("carrito");
             int loggedUserID = 0;
 
-            if (request.getParameter("logout") != null) {
+            if (request.getParameter(
+                    "logout") != null) {
                 session.setAttribute("user", null);
             }
 
-            if (request.getParameter("param") != null) {
+            if (request.getParameter(
+                    "param") != null) {
                 CustomerDAO customerDAO = new CustomerDAO();
                 AddressDAO addressDAO = new AddressDAO();
                 int deletingUserID = Integer.parseInt(request.getParameter("param"));
@@ -70,7 +109,9 @@
             }
 
             application.setAttribute(
-                    "carrito", cartLines); %>
+                    "carrito", cartLines);
+
+        %>
         <div class="padre">
             <div class="header">
                 <img src="../imagenes/logo.png" class="logoarr" alt="logo">
@@ -86,7 +127,7 @@
                         <div class="enlaces">
                             <a href="carrito.jsp"><img src="../imagenes/carrito.png" class="carrito" alt="carrito"></a>
                             <a  href="<%if (loggedUserID
-                                        != 0) {%><%= "profile.jsp?user=" + loggedUserID%><%} else {%><%= "login.jsp"%><%}%>"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
+                                            != 0) {%><%= "profile.jsp?user=" + loggedUserID%><%} else {%><%= "login.jsp"%><%}%>"><img src="../imagenes/iniciar-sesion.png" class="iniciosesion"
                                    alt="iniciosesion"></a>
                         </div>
                     </div>
@@ -105,7 +146,8 @@
                             <div class="productoprincipal">
                                 <img src="../imagenes/coffeeBag.png" class="cafedelmedio"
                                      alt="cafemedio">
-                                <%                                    ProductDAO productDAO = new ProductDAO();
+                                <%
+                                    ProductDAO productDAO = new ProductDAO();
                                     ArrayList<Product> productList = productDAO.get_products();
                                     Product bestSeller = productDAO.getBestSeller();
                                     DecimalFormat df = new DecimalFormat("0.00");

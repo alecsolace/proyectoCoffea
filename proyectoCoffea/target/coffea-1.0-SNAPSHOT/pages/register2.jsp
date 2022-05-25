@@ -26,8 +26,7 @@
             AddressDAO addressDAO = new AddressDAO();
             if (request.getParameter("direccion") != null && request.getParameter("numero") != null && request.getParameter("cp") != null) {
                 Address newAddress = new Address(newCustomer, request.getParameter("direccion"), Integer.parseInt(request.getParameter("numero")), request.getParameter("cp"));
-        %> 
-        <%
+                newAddress.setAddressID(addressDAO.getAddresses().size()+1);
             int customerRows = customerDAO.addUser(newCustomer);
             if (customerRows > 0) {
                 int addressRows = addressDAO.addAddress(newAddress);
