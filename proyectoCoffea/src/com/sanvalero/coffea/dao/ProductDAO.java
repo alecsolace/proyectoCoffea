@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import com.sanvalero.coffea.domain.Category;
 import com.sanvalero.coffea.domain.Product;
-import java.util.Random;
 
 /**
  *

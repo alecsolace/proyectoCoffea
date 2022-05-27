@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/aaguirrem/Desktop/proyectoCoffea/proyectoCoffea/src/main/java/com/sanvalero/coffea/domain/CartLine.java</file>
-            <file>file:/C:/Users/aaguirrem/Desktop/proyectoCoffea/proyectoCoffea/src/main/webapp/pages/profile.jsp</file>
-            <file>file:/C:/Users/aaguirrem/Desktop/proyectoCoffea/proyectoCoffea/src/main/java/com/sanvalero/coffea/dao/CustomerDAO.java</file>
-            <file>file:/C:/Users/aaguirrem/Desktop/proyectoCoffea/proyectoCoffea/src/main/webapp/pages/productos.jsp</file>
-            <file>file:/C:/Users/aaguirrem/Desktop/proyectoCoffea/proyectoCoffea/src/main/webapp/css/style-productos.css</file>
-            <file>file:/C:/Users/aaguirrem/Desktop/proyectoCoffea/proyectoCoffea/src/main/webapp/css/style-productoexppruebas.css</file>
-            <file>file:/C:/Users/aaguirrem/Desktop/proyectoCoffea/proyectoCoffea/src/main/webapp/pages/sobrenosotros.html</file>
-            <file>file:/C:/Users/aaguirrem/Desktop/proyectoCoffea/proyectoCoffea/src/main/webapp/css/style-sobrenosotros.css</file>
-            <file>file:/C:/Users/aaguirrem/Desktop/proyectoCoffea/proyectoCoffea/src/main/java/com/sanvalero/coffea/dao/CategoryDAO.java</file>
-            <file>file:/C:/Users/aaguirrem/Desktop/proyectoCoffea/proyectoCoffea/src/main/webapp/pages/productDetail.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
