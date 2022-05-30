@@ -26,12 +26,12 @@
             AddressDAO addressDAO = new AddressDAO();
             if (request.getParameter("direccion") != null && request.getParameter("numero") != null && request.getParameter("cp") != null) {
                 Address newAddress = new Address(newCustomer, request.getParameter("direccion"), Integer.parseInt(request.getParameter("numero")), request.getParameter("cp"));
-                newAddress.setAddressID(addressDAO.getAddresses().size()+1);
-            int customerRows = customerDAO.addUser(newCustomer);
-            if (customerRows > 0) {
-                int addressRows = addressDAO.addAddress(newAddress);
-                if (addressRows > 0) {
-                    session.setAttribute("user", newCustomer.getUserID());
+                newAddress.setAddressID(addressDAO.getAddresses().size() + 1);
+                int customerRows = customerDAO.addUser(newCustomer);
+                if (customerRows > 0) {
+                    int addressRows = addressDAO.addAddress(newAddress);
+                    if (addressRows > 0) {
+                        session.setAttribute("user", newCustomer.getUserID());
         %>
         <jsp:forward page="./index.jsp"> 
             <jsp:param name="newCustomer" value="newCustomer"/>
@@ -54,7 +54,7 @@
                     <div class="texto">
                         <p class="titulo">Have an account?</p>
                         <p>Log in to see all your cart.</p>
-                        <button><a href="login.html">Log In</a></button>
+                        <button><a href="login.jsp">Log In</a></button>
                     </div>
                 </div>
             </div>
