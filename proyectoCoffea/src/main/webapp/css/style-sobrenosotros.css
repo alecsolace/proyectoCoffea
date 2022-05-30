@@ -198,6 +198,14 @@ body {
 .der{
     width: 25%;
     background-color: #ff4e00;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    font-size: 3rem;
+    text-align: center;
+    box-sizing: content-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .tercero{
@@ -221,6 +229,16 @@ body {
     padding-left: 90px;
     padding-right: 90px;
     padding-top: 200px;
+}
+
+.contactanos{
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+.logo{
+  width: 30px;
+  height: auto;
 }
 
 .abajo {
