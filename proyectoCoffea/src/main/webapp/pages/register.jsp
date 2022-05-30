@@ -56,7 +56,7 @@
                             <input type="text" name="email" placeholder="  EMAIL">
                             <input type="password" name="password" placeholder="  PASSWORD">
                         </div>
-                        <input type="submit" name="submit" id="next" value="SIGUIENTE">
+                        <input type="submit" name="submit" id="next" value="NEXT">
                     </form>
 
                 </div>
